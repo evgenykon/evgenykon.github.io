@@ -1,0 +1,11 @@
+@media print {
+    body {
+        padding: 0;
+        margin: 0;
+        font-size: 12px;
+    }
+    @page { margin: 0 5mm; padding: 0; }
+    .printer-hidden {
+        display: none;
+    }
+}
