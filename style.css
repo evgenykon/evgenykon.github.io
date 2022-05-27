@@ -8,4 +8,20 @@
     .printer-hidden {
         display: none;
     }
+    .w-thin {
+        width: 40mm;
+        font-size: 11px;
+    }
+    h3.title.is-size-5 {
+        font-size: 16px !important;
+    }
+    .subtitle.is-6 {
+        font-size: 12px !important;
+    }
+    .column {
+        padding-bottom: 2px;
+    }
+}
+.w-thin {
+    width: 180px;
 }
