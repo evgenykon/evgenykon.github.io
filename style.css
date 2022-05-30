@@ -25,3 +25,8 @@
 .w-thin {
     width: 180px;
 }
+.starts {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    justify-items: center;
+}
