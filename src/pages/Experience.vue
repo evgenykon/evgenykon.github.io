@@ -46,7 +46,7 @@
                           
                           <cv-panel-item label="Age">{{$page.CvDoc.age}} y.o.</cv-panel-item>
                           <cv-panel-item label="Location">{{$page.CvDoc.location}}</cv-panel-item>
-                          <cv-panel-item label="Contact Email">{{$page.CvDoc.email}}</cv-panel-item>
+                          <cv-panel-item label="Email">{{$page.CvDoc.email}}</cv-panel-item>
 
                           <a class="panel-block" v-bind:href="$page.CvDoc.pdf">
                               <span class="panel-icon">

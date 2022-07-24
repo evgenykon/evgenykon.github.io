@@ -10,12 +10,30 @@
         <template #start>
             <g-link to="/experience/" class="navbar-item">Experience</g-link>
             <b-navbar-dropdown label="Pet Projects 👾">
-                <!-- b-navbar-item href="#">
-                    About
+                <b-navbar-item href="https://github.com/evgenykon/ffmpeg-ui">
+                    FFMPEG UI
                 </b-navbar-item>
-                <b-navbar-item href="#">
-                    Contact
-                </b-navbar-item -->
+                <b-navbar-item href="https://github.com/evgenykon/team-builder">
+                    Team Builder
+                </b-navbar-item>
+                <b-navbar-item href="https://github.com/evgenykon/sandbox">
+                    Sandbox
+                </b-navbar-item>
+                <b-navbar-item href="https://github.com/evgenykon/my-browser-game">
+                    My First Browser Game
+                </b-navbar-item>
+                <b-navbar-item href="https://github.com/evgenykon/corporate-game">
+                    Game for team buildings
+                </b-navbar-item>
+                <b-navbar-item href="https://github.com/evgenykon/quinto-circle">
+                    CSS Quinto circle
+                </b-navbar-item>
+                <b-navbar-item href="https://github.com/evgenykon/wall-area-calculator">
+                    Wall Area Calculator
+                </b-navbar-item>
+                <b-navbar-item href="https://github.com/evgenykon/nukeopp">
+                    Nuclear Opposition
+                </b-navbar-item>
             </b-navbar-dropdown>
         </template>
 
