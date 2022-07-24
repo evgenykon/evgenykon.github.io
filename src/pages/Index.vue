@@ -4,7 +4,7 @@
 
     <div class="container">
 
-   <b-navbar>
+      <b-navbar>
         <template #brand>
           <b-navbar-item tag="router-link" :to="{ path: '/' }">
               <g-image alt="Example image" src="~/images/evgeny-kon-500x500.jpg" width="30" />
@@ -40,19 +40,35 @@
             </b-navbar-dropdown>
         </template>
 
-    </b-navbar>
+      </b-navbar>
 
-      <div class="notification is-primary">
-        Site was created using <a href="https://gridsome.org">Gridsome</a> + <a href="https://vuejs.org">Vuejs</a> + <a href="https://bulma.io/">Bulma.io</a> by one night.
+      <div class="container">
+
+        <div class="notification is-primary">
+          Site was created using <a href="https://gridsome.org">Gridsome</a> + <a href="https://vuejs.org">Vuejs</a> + <a href="https://bulma.io/">Bulma.io</a> in one night.
+        </div>
+
       </div>
 
-      <div class="columns">
-        <div class="column is-2">
-          <figure class="image is-128x128 container">
-            <img src="https://www.svgrepo.com/show/420629/device-embedded-embedding.svg">
-          </figure>
+
+      <div class="container mt-4">
+        <div class="columns">
+          <div class="column is-2">
+            <figure class="image is-128x128 container">
+              <img src="https://www.svgrepo.com/show/420629/device-embedded-embedding.svg">
+            </figure>
+          </div>
+          <div class="column">
+            <pre>Blog will be later ...</pre>
+          </div>
         </div>
-        <div class="column"><pre>Blog will be later ...</pre></div>
+      </div>
+
+
+      <div class="container mt-4">
+        <div class="notification">
+          Right now I just want to have my personal page to <a href="/experience/">share my CV</a> and my ideas. 
+        </div>
       </div>
       
     </div>
