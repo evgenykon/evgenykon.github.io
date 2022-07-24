@@ -1,6 +1,9 @@
 <template>
   <Layout>
 
+
+    <div class="container">
+
    <b-navbar>
         <template #brand>
           <b-navbar-item tag="router-link" :to="{ path: '/' }">
@@ -38,6 +41,21 @@
         </template>
 
     </b-navbar>
+
+      <div class="notification is-primary">
+        Site was created using <a href="https://gridsome.org">Gridsome</a> + <a href="https://vuejs.org">Vuejs</a> + <a href="https://bulma.io/">Bulma.io</a> by one night.
+      </div>
+
+      <div class="columns">
+        <div class="column is-2">
+          <figure class="image is-128x128 container">
+            <img src="https://www.svgrepo.com/show/420629/device-embedded-embedding.svg">
+          </figure>
+        </div>
+        <div class="column"><pre>Blog will be later ...</pre></div>
+      </div>
+      
+    </div>
 
   </Layout>
 </template>
