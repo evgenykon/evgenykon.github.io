@@ -8,7 +8,7 @@
           </b-navbar-item>
         </template>
         <template #start>
-            <g-link to="/Experience/" class="navbar-item">Experience</g-link>
+            <g-link to="/experience/" class="navbar-item">Experience</g-link>
             <b-navbar-dropdown label="Pet Projects 👾">
                 <!-- b-navbar-item href="#">
                     About
