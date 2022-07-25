@@ -37,6 +37,9 @@
                 <b-navbar-item href="https://github.com/evgenykon/nukeopp">
                     Nuclear Opposition
                 </b-navbar-item>
+                <b-navbar-item href="https://evgenykon.github.io/english-grammar-trainer/">
+                    English Grammar Trainer
+                </b-navbar-item>
             </b-navbar-dropdown>
         </template>
 
