@@ -11,7 +11,7 @@
           </b-navbar-item>
         </template>
         <template #start>
-            <g-link to="/experience/" class="navbar-item">Experience</g-link>
+            <g-link to="/experience/" class="navbar-item">My experience 👨‍💻</g-link>
             <b-navbar-dropdown label="Pet Projects 👾">
                 <b-navbar-item href="https://github.com/evgenykon/ffmpeg-ui">
                     FFMPEG UI
@@ -47,25 +47,47 @@
 
       <div class="container">
 
-        <div class="notification is-primary">
+        <!-- div class="notification is-primary">
           Site was created using <a href="https://gridsome.org">Gridsome</a> + <a href="https://vuejs.org">Vuejs</a> + <a href="https://bulma.io/">Bulma.io</a> in one night.
-        </div>
+        </div -->
 
-      </div>
+     <section class="hero is-primary">
+        <div class="hero-body pl-0">
+          <div class="container-fluid">
 
+            <div class="columns">
+              <div class="column is-2">
+                <figure class="image is-128x128 container">
+                  <img src="https://www.svgrepo.com/show/420629/device-embedded-embedding.svg">
+                </figure>
+              </div>
+              <div class="column">
+                <p class="title">
+                  While you were reading this text
+                </p>
+                <p class="subtitle mb-5 mt-4">
+                  I'm committing code to my new pet-project's repository
+                </p>
+                <p class="is-size-7">But could have done a project for you instead</p>
+              </div>
+            </div>
 
-      <div class="container mt-4">
-        <div class="columns">
-          <div class="column is-2">
-            <figure class="image is-128x128 container">
-              <img src="https://www.svgrepo.com/show/420629/device-embedded-embedding.svg">
-            </figure>
           </div>
-          <div class="column">
-            <pre>Blog will be later ...</pre>
-          </div>
+          
         </div>
-      </div>
+      </section>
+
+<div class="content mt-5">
+<h3>DevBlog</h3>
+
+<blog-item v-for="post of $page.blogPosts.edges" :key="post.node.id" :title="post.node.title" :date="post.node.date">
+  <div v-html="post.node.content"></div>
+</blog-item>
+
+</div>
+
+
+    </div>
 
 
       <div class="container mt-4">
@@ -80,9 +102,13 @@
 </template>
 
 <script>
+import BlogItem from '../components/blog/BlogItem.vue';
 export default {
   metaInfo: {
     title: 'Evgeny Kon Github Page'
+  },
+  components: {
+    BlogItem
   }
 }
 </script>
@@ -92,3 +118,19 @@ export default {
   margin-right: 1rem;
 }
 </style>
+
+
+<page-query>
+query {
+  blogPosts: allDocs(filter: {type: {eq: "blog"}} sort: {by: "date", order: DESC}) {
+    edges {
+      node {
+        id
+        title
+        date
+        content
+      }
+    }
+  }
+}
+</page-query>
