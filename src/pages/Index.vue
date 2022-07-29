@@ -51,24 +51,15 @@
           Site was created using <a href="https://gridsome.org">Gridsome</a> + <a href="https://vuejs.org">Vuejs</a> + <a href="https://bulma.io/">Bulma.io</a> in one night.
         </div -->
 
-     <section class="hero is-primary">
-        <div class="hero-body pl-0">
+     <section class="hero is-primary px-3">
+        <div class="hero-body pl-0 py-2">
           <div class="container-fluid">
 
             <div class="columns">
-              <div class="column is-2">
-                <figure class="image is-128x128 container">
-                  <img src="https://www.svgrepo.com/show/420629/device-embedded-embedding.svg">
-                </figure>
-              </div>
-              <div class="column">
-                <p class="title">
-                  While you were reading this text
-                </p>
-                <p class="subtitle mb-5 mt-4">
-                  I'm committing code to my new pet-project's repository
-                </p>
-                <p class="is-size-7">But could have done a project for you instead</p>
+              <div class="column" style="font-family: 'Courier New', Courier, monospace;">
+                <p>Github is just a base for tons of my pet projects</p>
+                <p>While you read this I already create new repo.</p>
+                <p>Just hire me for you 'big project' and it code base will be as largest as you server disk space availible.</p>
               </div>
             </div>
 
@@ -77,7 +68,7 @@
         </div>
       </section>
 
-<div class="content mt-5">
+<div class="content mt-5 ml-2">
 <h3>DevBlog</h3>
 
 <blog-item v-for="post of $page.blogPosts.edges" :key="post.node.id" :title="post.node.title" :date="post.node.date">

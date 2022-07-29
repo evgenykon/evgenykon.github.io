@@ -1,14 +1,8 @@
-# Default starter for Gridsome
+# My Github pages project
 
-This is the project you get when you run `gridsome create new-project`.
+Powered by Gridsome
 
-### 1. Install Gridsome CLI tool if you don't have
+### 1. Run
 
-`npm install --global @gridsome/cli`
+`gridsome develop`
 
-### 2. Create a Gridsome project
-
-1. `gridsome create my-gridsome-site` to install default starter
-2. `cd my-gridsome-site` to open the folder
-3. `gridsome develop` to start a local dev server at `http://localhost:8080`
-4. Happy coding 🎉🙌
