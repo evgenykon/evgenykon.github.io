@@ -6,3 +6,6 @@ Powered by Gridsome
 
 `gridsome develop`
 
+### 2 Deploy
+
+`npm run deploy`
