@@ -60,9 +60,7 @@
 
             <div class="columns">
               <div class="column" style="font-family: 'Courier New', Courier, monospace;">
-                <p>Github is just a base for tons of my pet projects</p>
-                <p>While you read this I already create new repo.</p>
-                <p>Just hire me for you 'big project' and it code base will be as largest as you server disk space availible.</p>
+                <p v-for="text in $page.MainDoc.TopBanner">{{text}}</p>
               </div>
             </div>
 
@@ -72,7 +70,7 @@
       </section>
 
 <div class="content mt-5 ml-2">
-<h3>DevBlog</h3>
+<h3>{{$page.MainDoc.title}}</h3>
 
 <blog-item v-for="post of $page.blogPosts.edges" :key="post.node.id" :title="post.node.title" :date="post.node.date">
   <div v-html="post.node.content"></div>
@@ -86,7 +84,7 @@
 
       <div class="container mt-4">
         <div class="notification">
-          Right now I just want to have my personal page to <a href="/experience/">share my CV</a> and my ideas. 
+          {{$page.MainDoc.Bottom}}
         </div>
       </div>
       
@@ -125,6 +123,11 @@ query {
         content
       }
     }
+  },
+  MainDoc: docs(path: "/docs/main/") {
+    title
+    TopBanner
+    Bottom
   }
 }
 </page-query>
