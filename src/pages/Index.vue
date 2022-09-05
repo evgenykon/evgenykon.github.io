@@ -43,6 +43,9 @@
                 <b-navbar-item href="https://github.com/evgenykon/sound-mixer">
                     Sound Mixer Repo 
                 </b-navbar-item>
+                <b-navbar-item href="https://github.com/evgenykon/mma-prediction">
+                    MMA Prediction
+                </b-navbar-item>
             </b-navbar-dropdown>
         </template>
 
