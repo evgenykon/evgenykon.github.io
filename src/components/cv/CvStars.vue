@@ -16,7 +16,7 @@ export default {
         },
         char: {
             type: String,
-            default: "⭐"
+            default: "✔"
         }
     }
 }

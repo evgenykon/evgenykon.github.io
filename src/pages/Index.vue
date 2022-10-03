@@ -81,10 +81,7 @@
 
 </div>
 
-
     </div>
-
-
       <div class="container mt-4">
         <div class="notification">
           {{$page.MainDoc.Bottom}}
