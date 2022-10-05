@@ -1,21 +1,21 @@
 <template>
 
     <div class="cv-job-item block">
-        <div class="columns">
+        <div class="columns mb-1">
             <div class="content column is-one-quarter mb-0 py-1">
                 <h3 class="title">
                     {{title}}
                 </h3>
-                <p class="subtitle is-6">{{subtitle}}</p>
+                <p class="subtitle is-6">{{place}} <br /> {{dates}}</p>
             </div>
-            <div class="column is-one-quarter py-1">{{place}} | {{dates}}</div>
+            <div class="column is-one-quarter py-1">{{subtitle}}</div>
             <div class="content column auto  py-1">
                 {{description}}
             </div>
         </div>
         <div class="columns">
             <div class="column">
-                <span class="tag is-primary is-medium mr-1 mb-1 is-light" v-for="item in stack">{{item}}</span>
+                <span class="tag is-primary is-medium mr-1 is-light" v-for="item in stack">{{item}}</span>
             </div>
         </div>
         

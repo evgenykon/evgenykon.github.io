@@ -2,7 +2,7 @@
 type: cv
 title: Evgeny Konoplev
 position: Full-Stack Developer
-annotation: As I already experienced in BackEnd so I wish to improve my skills in frontend or mobile development. Also i'm learning about Web3 technologies and interested in relevant work.
+annotation: I have more than 10 years of experience in web development, where my base languages were PHP and JS. Last 5 years I am working with Vue.js and Node.js. Two years ago I made my pet project with Flutter. Last year I started to learn TypeScript and React. In my current role as Senior fullstack web developer at medical company (one of leaders in laboratory services in Central Asia), I proved to be an enthusiastic, efficient and valuable team member. At my previous work I had a leadership role with 10 member's team. We practiced SCRUM, finished a big project and became a great friends.
 age: 37
 location: Nomad
 email: effusps@gmail.com
@@ -52,7 +52,7 @@ jobs:
     role: Senior fullstack web developer
     place: Moscow (remote)
     period: Oct 2017 - Present
-    description: Business-oriented development with fixed deadlines, big feature teams and complex internal production algorithms.
+    description: Feature developing with fixed deadlines. Small feature team management. Code review. Unit tests for new features. Complex production system supporting. Integration protocol author. Frontend ecosystem architector.
     stack: 
     - Webpack
     - MSSQL
@@ -61,6 +61,7 @@ jobs:
     - Symphony
     - Laravel
     - Docker
+    - RabbitMQ
     - Vue.js
     - Jest
     - Pupeteer
@@ -71,9 +72,9 @@ jobs:
     role: Fullstack web developer, Teamlead, Head of Webdev
     place: Moscow
     period: Mar 2013 - Oct 2017
-    description: Another highload with lot of B2B APIs and big internal infrastructure.
+    description: Higloaded (10k hits/sec) ticket service project developing and supporting. Team management using SCRUM/Kanban with design, mobile, front, back and DB team members. Backend architector with "monolith to microservices" sucessfull migration story.
     stack:
-    - Yii 1,2
+    - Yii
     - Sybase
     - MSSQL
     - Couchbase
@@ -88,18 +89,18 @@ jobs:
     role: Fullstack web developer
     place: Moscow
     period: Nov 2011 - Mar 2013
-    description: Work with high load projects
+    description: Higloaded media project developing and supporting. Video-audio streaming. Payment API integrations. PHP 5 to 7 sucessfull upgrade. RESTful API for core service. MySQL optimization triks.
     stack: 
-    - PHP 5
+    - PHP 5-7
     - Memcache
-    - Mysql
+    - MySQL
     - Twitter Bootstrap
     - Python 2.7
   - title: IFS Payment Systems
     role: Fullstack developer
     place: Moscow
     period: Jun 2008 - Oct 2011
-    description: Work with street payment terminals
+    description: Street payment terminal network developer. Frontend payment application based on Linux. Working with terminal money hardware. Connection-stable algorythms for payment transactions. Remote interface update system. Secure networking.
     stack: 
     - PHP4-5 
     - CodeIgniter
@@ -108,4 +109,6 @@ jobs:
     - MSSQL 
     - C for Unix (shared memory, unix queue, pipes)
     - Unix shell scripting
+    - TCP/IP network
+    - HTTPS and secure tunnel adminstration
 ---

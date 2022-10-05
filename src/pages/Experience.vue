@@ -20,7 +20,7 @@
                     </div>
 
 
-                    <h2 class="title is-5 mt-5 pt-5">WORK EXPERIENCE</h2>
+                    <h2 class="title is-5 mt-1 pt-1">WORK EXPERIENCE</h2>
 
                     <cv-job v-for="job of $page.CvDoc.jobs" 
                       v-bind:key="job.id"
@@ -33,7 +33,7 @@
                     >
                     </cv-job>
 
-                    <h2 class="title is-5">
+                    <h2 class="title is-5 mb-1">
                       <span class="icon-text">
                         <span class="icon">
                           <g-image alt="Network profile" src="https://www.svgrepo.com/show/374863/education.svg" />
@@ -195,14 +195,20 @@ export default {
   margin-right: 1rem;
 }
 .cv-job-item .title {
-  font-size: 1.2rem;
+  font-size: 1rem;
+}
+.cv-job-item .subtitle {
+  font-size: 0.8rem;
 }
 .cv-job-item {
-  padding-bottom: 1.4rem;
+  padding-bottom: 1.9rem;
   padding-left: 0.5rem;
 }
 .cv-job-item .tag:not(body).is-medium {
   font-size: 0.7rem;
+}
+.block:not(:last-child) {
+  margin-bottom: 0.5rem;
 }
 .print-only {
   display: none;
@@ -225,6 +231,10 @@ export default {
   }
   .tag:not(body).is-medium {
     font-size: 12px;
+    padding: 1px;
+    margin: 0;
+    line-height: 12px;
+    height: 18px;
   }
   .cv-job-item .column {
     padding: 4px;
@@ -236,6 +246,9 @@ export default {
   }
   .tag:not(body).achive-date {
     font-size: 10px;
+  }
+  .panel {
+    box-shadow: none;
   }
   @page {
     padding: 2cm;
