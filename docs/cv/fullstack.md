@@ -11,9 +11,11 @@ baseUrl: "/experience/"
 skills: 
     - name: PHP
       rate: 5
-    - name: Javascript
+    - name: Vue.js
       rate: 5
-    - name: SQL
+    - name: Node.js
+      rate: 4
+    - name: MSSQL
       rate: 5
     - name: Unit tests
       rate: 4

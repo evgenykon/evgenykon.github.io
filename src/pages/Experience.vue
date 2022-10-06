@@ -88,22 +88,6 @@
 
                         <nav class="panel">
                           <div class="panel-block">
-                            <strong>My top skills</strong>
-                          </div>
-
-
-                          <div class="panel-block container p-0" v-for="skill of $page.CvDoc.skills">
-                            <div class="column py-1">
-                              {{skill.name}}
-                            </div>
-                            <div class="column py-1">
-                              <cv-stars v-bind:count="skill.rate"></cv-stars>
-                            </div>
-                          </div>
-                        </nav>
-
-                        <nav class="panel">
-                          <div class="panel-block">
                             <strong>Social</strong>
                           </div>
                           <a class="panel-block not-print" v-for="item of $page.CvDoc.socialLinks" v-bind:href="item.url">
@@ -121,6 +105,18 @@
                             </div>
                           </div>
                           
+                        </nav>
+
+                        <nav class="panel">
+                          <div class="panel-block">
+                            <strong>My top skills</strong>
+                          </div>
+
+                          <div class="panel-block container p-0">
+                            <div class="column py-1">
+                              <span class="tag is-primary is-light mr-1" v-for="skill of $page.CvDoc.skills"> {{skill.name}} </span>
+                            </div>
+                          </div>
                         </nav>
 
                         <nav class="panel">
@@ -249,6 +245,11 @@ export default {
   }
   .panel {
     box-shadow: none;
+  }
+  .right-sidebar .tag:not(body).is-primary.is-light {
+    padding: 1px 3px;
+    text-decoration: underline #ccc;
+    color: black;
   }
   @page {
     padding: 2cm;
