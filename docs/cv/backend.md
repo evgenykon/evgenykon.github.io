@@ -2,7 +2,7 @@
 type: cv
 title: Evgeny Konoplev
 position: Backend Developer
-annotation: I have more than 10 years of experience in web development, where my base languages were PHP and JS. Last 5 years I am working with Vue.js and Node.js. Two years ago I made my pet project with Flutter. Last year I started to learn TypeScript and React. In my current role as Senior fullstack web developer at medical company (one of leaders in laboratory services in Central Asia), I proved to be an enthusiastic, efficient and valuable team member. At my previous work I had a leadership role with 10 member's team. We practiced SCRUM, finished a big project and became a great friends.
+annotation: I have more than 10 years of experience in web development, where my base languages were PHP and JS. Last 5 years I am working with Vue.js and Node.js. Two years ago I made my pet project with Flutter. Last year I started to learn TypeScript and React. In my current role as Senior fullstack web developer at medical company (one of leaders in laboratory services in Central Asia), I proved to be an enthusiastic, efficient and valuable team member. At my previous work I had a leadership role with 10 members team. We practiced SCRUM, finished a big project and became a great friends.
 age: 37
 location: Nomad
 email: effusps@gmail.com
@@ -71,7 +71,7 @@ jobs:
     role: Fullstack web developer, Teamlead, Head of Webdev
     place: Moscow
     period: Mar 2013 - Oct 2017
-    description: Higloaded (10k hits/sec) ticket service project developing and supporting. Team management using SCRUM/Kanban with design, mobile, front, back and DB team members. Backend architector with "monolith to microservices" sucessfull migration story.
+    description: Higloaded (10k hits/sec) ticket service project developing and supporting. Team management using SCRUM/Kanban with design, mobile, front, back and DB team members. Backend architector with "monolith to microservices" successfull migration story.
     stack:
     - Yii 1,2
     - Node.js
@@ -87,7 +87,7 @@ jobs:
     role: Fullstack web developer
     place: Moscow
     period: Nov 2011 - Mar 2013
-    description: Higloaded media project developing and supporting. Video-audio streaming. Payment API integrations. PHP 5 to 7 sucessfull upgrade. 
+    description: Higloaded media project developing and supporting. Video-audio streaming. Payment API integrations. PHP 5 to 7 successfull upgrade. 
     stack: 
     - PHP 5
     - Memcache

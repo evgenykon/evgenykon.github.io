@@ -64,7 +64,7 @@ jobs:
     role: Fullstack web developer, Teamlead, Head of Webdev
     place: Moscow
     period: Mar 2013 - Oct 2017
-    description: Higloaded (10k hits/sec) ticket service project developing and supporting. Team management using SCRUM/Kanban with design, mobile, front, back and DB team members. Backend architector with "monolith to microservices" sucessfull migration story.
+    description: Higloaded (10k hits/sec) ticket service project developing and supporting. Team management using SCRUM/Kanban with design, mobile, front, back and DB team members. Architector with "monolith to microservices" successfull migration story.
     stack:
     - Node.js
     - React.js
@@ -73,14 +73,14 @@ jobs:
     role: Fullstack web developer
     place: Moscow
     period: Nov 2011 - Mar 2013
-    description: Higloaded media project developing and supporting. Video-audio streaming. Payment API integrations. PHP 5 to 7 sucessfull upgrade. 
+    description: Higloaded media project developing and supporting. Video-audio streaming. Payment API integrations. PHP 5 to 7 successfull upgrade. 
     stack: 
     - Twitter Bootstrap
   - title: IFS Payment Systems
     role: Fullstack developer
     place: Moscow
     period: Jun 2008 - Oct 2011
-    description: Street payment terminal network developer. Frontend payment application based on Linux. Working with terminal money hardware. Connection-stable algorythms for payment transactions. Remote interface update system. Secure networking.
+    description: Street payment terminal network developer. Frontend payment application based on Linux. Working with terminal money hardware. Connection-stable algorithms for payment transactions. Remote interface update system. Secure networking.
     stack: 
     - ColdFusion
     - Vanilla JS
