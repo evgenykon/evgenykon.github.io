@@ -46,9 +46,16 @@
                 <b-navbar-item href="https://github.com/evgenykon/mma-prediction">
                     MMA Prediction
                 </b-navbar-item>
+                <b-navbar-item href="https://evgenykon.github.io/interview-trainer">
+                    Interview Trainer
+                </b-navbar-item>
             </b-navbar-dropdown>
         </template>
-
+        <template #end>
+          <b-navbar-item href="https://github.com/evgenykon">
+            Github
+          </b-navbar-item>
+        </template>
       </b-navbar>
 
       <div class="container">
