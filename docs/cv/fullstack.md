@@ -34,6 +34,10 @@ socialLinks:
       url: https://www.hackerrank.com/effusps
       img: https://www.svgrepo.com/show/306171/hackerrank.svg
       print: /effusps
+    - id: CodeWars
+      url: https://www.codewars.com/users/evgenykon
+      img: https://www.svgrepo.com/show/305890/codewars.svg
+      print: /users/evgenykon
 education:
     name: State Technological Academy
     place: Penza, Russia
@@ -49,6 +53,9 @@ achivements:
     - name: HackerRank JS Intermediate
       date: 04 Dec 2021
       url: https://www.hackerrank.com/certificates/9e750a2bb8d4
+    - name: CodeWars 5 kyu
+      date: 06 Nov 2022
+      url: https://www.codewars.com/users/evgenykon/badges
 jobs:
   - title: Gemotest.ru
     role: Senior fullstack web developer

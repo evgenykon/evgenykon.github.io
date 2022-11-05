@@ -34,6 +34,10 @@ socialLinks:
       url: https://www.hackerrank.com/effusps
       img: https://www.svgrepo.com/show/306171/hackerrank.svg
       print: /effusps
+    - id: CodeWars
+      url: https://www.codewars.com/users/evgenykon
+      img: https://www.svgrepo.com/show/305890/codewars.svg
+      print: /users/evgenykon
 education:
     name: State Technological Academy
     place: Penza, Russia
