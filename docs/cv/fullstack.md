@@ -81,7 +81,7 @@ jobs:
     role: Fullstack web developer, Teamlead, Head of Webdev
     place: Moscow
     period: Mar 2013 - Oct 2017
-    description: Higloaded (10k hits/sec) ticket service project developing and supporting. Team management using SCRUM/Kanban with design, mobile, front, back and DB team members. Backend architector with "monolith to microservices" successfull migration story.
+    description: Higloaded (10k hits/min) ticket service project developing and supporting. Team management using SCRUM/Kanban with design, mobile, front, back and DB team members. Backend architector with "monolith to microservices" successfull migration story.
     stack:
     - Yii
     - Sybase
