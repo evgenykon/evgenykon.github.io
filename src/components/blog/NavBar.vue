@@ -47,6 +47,9 @@
         <b-navbar-item href="/demos/allow-list">
           AllowList site checker
         </b-navbar-item>
+        <b-navbar-item href="https://github.com/evgenykon/game-helper">
+          Game Helper
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
     <template #end>
