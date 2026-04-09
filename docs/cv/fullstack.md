@@ -1,26 +1,24 @@
 ---
 type: cv
 title: Evgeny Konoplev
-position: Full-Stack Developer
-annotation: I have more than 10 years of experience in web development, where my base languages were PHP and JS. Last 5 years I am working with Vue.js and Node.js. Two years ago I made my pet project with Flutter. Last year I started to learn TypeScript and React. In my current role as Senior fullstack web developer at medical company (one of leaders in laboratory services in Central Asia), I proved to be an enthusiastic, efficient and valuable team member. At my previous work I had a leadership role with 10 members team. We practiced SCRUM, finished a big project and became a great friends.
-age: 37
-location: Nomad
+position: Senior Full-Stack Developer / Tech Lead
+annotation: Full-stack architect with 15+ years of experience (TypeScript, Node.js, PHP, SQL). Built high-load ticketing systems (10k+ RPS) and educational platforms with WebRTC video conferencing. Led teams of up to 10 engineers. Focus on performance, clean code, and scalable architecture.
+age: 40
+location: Moscow
 email: effusps@gmail.com
 pdf: "/pdf/KonoplevEvgeny-fullstack-CV.pdf"
 baseUrl: "/experience/"
-skills: 
-    - name: PHP
+skills:
+    - name: Vue.js 3 (2/3, Vuex/Pinia)
       rate: 5
-    - name: Vue.js
+    - name: Node.js (Fastify, Express, NestJS)
       rate: 5
-    - name: Node.js
-      rate: 4
-    - name: MSSQL
+    - name: PHP 8+ (Laravel, Symfony, Yii)
       rate: 5
-    - name: Unit tests
-      rate: 4
-    - name: Linux Shell
-      rate: 4
+    - name: SQL (PostgreSQL, MSSQL, MySQL)
+      rate: 5
+    - name: AWS / Docker
+      rate: 5
 socialLinks:
     - id: LinkedIn
       url: https://www.linkedin.com/in/evgeny-kon/
@@ -57,26 +55,30 @@ achivements:
       date: 06 Nov 2022
       url: https://www.codewars.com/users/evgenykon/badges
 jobs:
+  - title: YaizY
+    role: CTO
+    place: Moscow (remote)
+    period: Dec 2023 - Present
+    description: End-to-end product lifecycle of an educational platform (including video conferencing). Established CI/CD, DevOps, monitoring, and QA processes (stability, incident review). Managed server/license costs. Eliminated bottlenecks via query tuning and refactoring. Handled security and education sector compliance. 
+    stack:
+      - PostgreSQL
+      - TypeScript
+      - Node.js / Fastify
+      - Websockets / WebRTC
+      - Gitlab CI / Docker / AWS
+      - EdTech APIs (LTI, Canvas)
+      - OpenAI API
   - title: Gemotest.ru
     role: Senior fullstack web developer
     place: Moscow (remote)
-    period: Oct 2017 - Present
+    period: Oct 2017 - Dec 2023
     description: Feature developing with fixed deadlines. Small feature team management. Code review. Unit tests for new features. Complex production system supporting. Integration protocol author. Frontend ecosystem architector.
-    stack: 
-    - Webpack
-    - MSSQL
-    - PHP 7
-    - Yii 
-    - Symphony
-    - Laravel
-    - Docker
-    - RabbitMQ
-    - Vue.js
-    - Jest
-    - Pupeteer
-    - RESTfull microservices
-    - Gitlab CI
-    - Ansible
+    stack:
+      - Vue.js / Jest / Puppeteer / Webpack
+      - PHP 7 / Yii / Symfony / Laravel
+      - MSSQL / Docker / RabbitMQ
+      - GitLab CI / Ansible
+      - RESTful microservices
   - title: Ticketland.ru
     role: Fullstack web developer, Teamlead, Head of Webdev
     place: Moscow
@@ -94,25 +96,12 @@ jobs:
     - Node.js
     - React.js
     - Agile/Scrum
-  - title: BDirect Media Group
-    role: Fullstack web developer
-    place: Moscow
-    period: Nov 2011 - Mar 2013
-    description: Higloaded media project developing and supporting. Video-audio streaming. Payment API integrations. PHP 5 to 7 successfull upgrade. RESTful API for core service. MySQL's optimization tricks.
-    stack: 
-    - PHP 5-7
-    - Memcache
-    - MySQL
-    - Twitter Bootstrap
-    - Python 2.7
   - title: IFS Payment Systems
     role: Fullstack developer
     place: Moscow
     period: Jun 2008 - Oct 2011
     description: Street payment terminal network developer. Frontend payment application based on Linux. Working with terminal money hardware. Connection-stable algorithms for payment transactions. Remote interface update system. Secure networking.
     stack: 
-    - PHP4-5 
-    - CodeIgniter
     - ColdFusion
     - Vanilla JS (+JQuery)
     - MSSQL 

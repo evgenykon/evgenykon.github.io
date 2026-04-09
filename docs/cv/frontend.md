@@ -1,25 +1,25 @@
 ---
 type: cv
 title: Evgeny Konoplev
-position: Frontend Developer
-annotation: I have more than 10 years of experience in web development, where my base languages were PHP and JS. Last 5 years I am working with Vue.js and Node.js. Two years ago I made my pet project with Flutter. Last year I started to learn TypeScript and React. In my current role as Senior fullstack web developer at medical company (one of leaders in laboratory services in Central Asia), I proved to be an enthusiastic, efficient and valuable team member. At my previous work I had a leadership role with 10 member's team. We practiced SCRUM, finished a big project and became a great friends.
-age: 37
-location: Nomad
+position: Senior Frontend Developer / Tech Lead
+annotation: Frontend architect with 15+ years of experience and strong fullstack background (Vue.js, Node.js, WebSockets, WebRTC). Led teams of up to 10 engineers. Built and optimised high‑load educational platforms with video conferencing. Focus on performance, clean code, and mentorship.
+age: 40
+location: Moscow
 email: effusps@gmail.com
 pdf: "/pdf/KonoplevEvgeny-frontend-CV.pdf"
 baseUrl: "/experience-front/"
 skills: 
-    - name: Vue.js
+    - name: Vue.js (2/3, Vuex/Pinia)
       rate: 5
-    - name: Webpack
+    - name: Webpack / Vite
       rate: 5
-    - name: Bootstrap
+    - name: Node.js (Express, NestJS, Fastify)
       rate: 5
-    - name: Gridsome
+    - name: CI/CD (GitLab CI)
+      rate: 5
+    - name: WebRTC / WebSockets
       rate: 4
-    - name: Node.js
-      rate: 4
-    - name: GraphQL
+    - name: Testing (Jest, Vitest, Puppeteer)
       rate: 4
 socialLinks:
     - id: LinkedIn
@@ -51,6 +51,19 @@ achivements:
       date: 25 June 2015
       url: "/pdf/CertAgile.pdf"
 jobs:
+  - title: YaizY
+    role: CTO
+    place: Moscow (remote)
+    period: Dec 2023 - Present
+    description: End-to-end product lifecycle of an educational platform (including video conferencing). Established CI/CD, DevOps, monitoring, and QA processes (stability, incident review). Managed server/license costs. Eliminated bottlenecks via query tuning and refactoring. Handled security and education sector compliance.
+    stack:
+    - PostgreSQL
+    - TypeScript
+    - Node.js / Fastify
+    - Websockets / WebRTC
+    - Gitlab CI / Docker / AWS
+    - EdTech APIs (LTI, Canvas)
+    - OpenAI API
   - title: Gemotest.ru
     role: Senior fullstack web developer
     place: Moscow (remote)
@@ -61,25 +74,18 @@ jobs:
     - Vue.js
     - Vuetify
     - Jest
-    - Pupeteer
+    - Puppeteer
     - RESTfull microservices API
     - Gitlab CI
   - title: Ticketland.ru
     role: Fullstack web developer, Teamlead, Head of Webdev
     place: Moscow
     period: Mar 2013 - Oct 2017
-    description: Higloaded (10k hits/min) ticket service project developing and supporting. Team management using SCRUM/Kanban with design, mobile, front, back and DB team members. Architector with "monolith to microservices" successfull migration story.
+    description: High-loaded (10k hits/min) ticket service project develop and support. Team management using SCRUM/Kanban with design, mobile, front, back and DB team members. Architect with "monolith to microservices" successfull migration story.
     stack:
     - Node.js
     - React.js
     - Agile/Scrum
-  - title: BDirect Media Group
-    role: Fullstack web developer
-    place: Moscow
-    period: Nov 2011 - Mar 2013
-    description: Higloaded media project developing and supporting. Video-audio streaming. Payment API integrations. PHP 5 to 7 successfull upgrade. 
-    stack: 
-    - Twitter Bootstrap
   - title: IFS Payment Systems
     role: Fullstack developer
     place: Moscow

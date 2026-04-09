@@ -6,3 +6,6 @@ node_modules
 #dist
 .env
 .env.*
+.idea
+.gemini
+./dist
