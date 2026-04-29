@@ -1,15 +1,20 @@
-# My Github pages project
+# Evgeny.Kon page
 
-Powered by Gridsome
+## Setup dev
 
-### 1. Run
+1. Install with docker compose
+```
+make build-images
+make dev
+```
+2. Open in browser
 
-`gridsome develop`
+http://localhost:13200/
 
-### 2 Deploy
+## Deploy to Github
 
-`npm run deploy`
-
-### CSS
-
-- [https://buefy.org/](Buefy)
+1. Commit & push & switch to master
+2. run `make deploy`
+3. gh-pages build static files and commit it to own branch 'gh-pages'
+4. Look at https://github.com/evgenykon/evgenykon.github.io/settings/pages branch should be `gh-pages`
+5. Wait few minutes

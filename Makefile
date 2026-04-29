@@ -21,4 +21,4 @@ cmd:
 	docker compose -f compose.dev.yaml run builder bash
 
 deploy:
-	docker compose -f compose.dev.yaml run --rm gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && npm run deploy"
+	docker compose -f compose.dev.yaml run --rm -v ~/.ssh:/root/.ssh:ro gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && git config user.email 'effusps@gmail.com' && git config user.name 'evgeny.kon' && npm run deploy"
