@@ -2,7 +2,7 @@
   <b-navbar>
     <template #brand>
       <b-navbar-item tag="router-link" :to="{ path: '/' }">
-        <g-image alt="Example image" src="~/images/evgeny-kon-500x500.jpg" width="30" />
+        <g-image alt="Example image" src="~/images/evgeny-kon-500x500-v2.jpeg" width="30" />
       </b-navbar-item>
     </template>
     <template #start>

@@ -12,10 +12,10 @@ down:
 	docker compose -f compose.dev.yaml down
 
 dev-build:
-	docker compose run --rm gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && yarn install"
+	docker compose -f compose.dev.yaml run --rm gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && yarn install"
 
 dev:
-	docker compose run -p "13200:8080"  --rm gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && yarn run develop"
+	docker compose -f compose.dev.yaml run -p "13200:8080"  --rm gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && yarn run develop"
 
 cmd:
-	docker compose run builder bash
+	docker compose -f compose.dev.yaml run builder bash
