@@ -64,7 +64,7 @@
                 <div class="media">
                   <div class="container">
 
-                    <cv-photo size="170"></cv-photo>
+                    <cv-photo :size="170"></cv-photo>
 
                   </div>
                 </div>
@@ -79,7 +79,7 @@
 
                     <a class="panel-block not-print" v-bind:href="$page.CvDoc.pdf">
                               <span class="panel-icon">
-                                <g-image alt="Download CV" src="https://www.svgrepo.com/show/28209/pdf.svg" width="30"/>
+                                <g-image alt="Download CV" src="~/images/icons8-pdf-96.png" width="30"/>
                               </span>
                       Download CV
                     </a>

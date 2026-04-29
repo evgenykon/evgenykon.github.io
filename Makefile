@@ -19,3 +19,6 @@ dev:
 
 cmd:
 	docker compose -f compose.dev.yaml run builder bash
+
+deploy:
+	docker compose -f compose.dev.yaml run --rm gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && npm run deploy"
