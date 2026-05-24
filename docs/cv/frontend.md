@@ -2,7 +2,7 @@
 type: cv
 title: Evgeny Konoplev
 position: Senior Frontend Developer / Tech Lead
-annotation: Frontend architect with 15+ years of experience and strong fullstack background (Vue.js, Node.js, WebSockets, WebRTC). Led teams of up to 10 engineers. Built and optimised high‑load educational platforms with video conferencing. Focus on performance, clean code, and mentorship.
+annotation: Frontend architect with 15+ years of experience and strong fullstack background (Vue.js, Node.js, WebSockets, WebRTC). Integrate AI capabilities (OpenAI API, LLMs) into products. Led teams of up to 10 engineers. Built and optimised high‑load educational platforms with video conferencing. Focus on performance, clean code, and mentorship.
 age: 40
 location: Moscow
 email: effusps@gmail.com
@@ -20,6 +20,8 @@ skills:
     - name: WebRTC / WebSockets
       rate: 4
     - name: Testing (Jest, Vitest, Puppeteer)
+      rate: 4
+    - name: AI/ML (OpenAI API, LLMs, Prompt Engineering)
       rate: 4
 socialLinks:
     - id: LinkedIn

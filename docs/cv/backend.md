@@ -2,7 +2,7 @@
 type: cv
 title: Evgeny Konoplev
 position: Backend Developer
-annotation: I have more than 10 years of experience in web development, where my base languages were PHP and JS. Last 5 years I am working with Vue.js and Node.js. Two years ago I made my pet project with Flutter. Last year I started to learn TypeScript and React. In my current role as Senior fullstack web developer at medical company (one of leaders in laboratory services in Central Asia), I proved to be an enthusiastic, efficient and valuable team member. At my previous work I had a leadership role with 10 members team. We practiced SCRUM, finished a big project and became a great friends.
+annotation: I have more than 10 years of experience in web development, with PHP, JS, Vue.js, Node.js, and TypeScript as my core stack. I integrate AI capabilities (OpenAI API, LLMs) into products and build ML‑related pet projects. In my current role as Senior fullstack web developer at a leading medical company in Central Asia, I proved to be an enthusiastic, efficient and valuable team member. Previously I led a team of 10 engineers using SCRUM, delivered a major project, and built strong team culture.
 age: 37
 location: Nomad
 email: effusps@gmail.com
@@ -24,6 +24,8 @@ skills:
     - name: GraphQL
       rate: 4
     - name: MongoDB
+      rate: 4
+    - name: AI/ML (OpenAI API, LLMs, Prompts)
       rate: 4
 socialLinks:
     - id: LinkedIn

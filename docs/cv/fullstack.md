@@ -2,7 +2,7 @@
 type: cv
 title: Evgeny Konoplev
 position: Senior Full-Stack Developer / Tech Lead
-annotation: Full-stack architect with 15+ years of experience (TypeScript, Node.js, PHP, SQL). Built high-load ticketing systems (10k+ RPS) and educational platforms with WebRTC video conferencing. Led teams of up to 10 engineers. Focus on performance, clean code, and scalable architecture.
+annotation: Full-stack architect with 15+ years of experience (TypeScript, Node.js, PHP, SQL). Built high-load ticketing systems (10k+ RPS) and educational platforms with WebRTC video conferencing. Integrate AI capabilities (OpenAI API, LLMs, prompt engineering) into products. Led teams of up to 10 engineers. Focus on performance, clean code, and scalable architecture.
 age: 40
 location: Moscow
 email: effusps@gmail.com
@@ -19,6 +19,8 @@ skills:
       rate: 5
     - name: AWS / Docker
       rate: 5
+    - name: AI/ML (OpenAI API, LLMs, Prompts)
+      rate: 4
 socialLinks:
     - id: LinkedIn
       url: https://www.linkedin.com/in/evgeny-kon/
