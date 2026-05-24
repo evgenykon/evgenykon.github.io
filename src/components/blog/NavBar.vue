@@ -47,6 +47,9 @@
         <b-navbar-item href="/demos/allow-list">
           AllowList site checker
         </b-navbar-item>
+        <b-navbar-item href="https://evgenykon.github.io/three-body-problem/">
+          Three Body Problem
+        </b-navbar-item>
         <b-navbar-item href="https://github.com/evgenykon/game-helper">
           Game Helper
         </b-navbar-item>
