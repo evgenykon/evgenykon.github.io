@@ -8,50 +8,11 @@
     <template #start>
       <g-link to="/experience/" class="navbar-item">My experience 👨‍💻</g-link>
       <b-navbar-dropdown label="Pet Projects 👾">
-        <b-navbar-item href="https://github.com/evgenykon/ffmpeg-ui">
-          FFMPEG UI
-        </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/team-builder">
-          Team Builder
-        </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/sandbox">
-          Sandbox
-        </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/my-browser-game">
-          My First Browser Game
-        </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/corporate-game">
-          Game for team buildings
-        </b-navbar-item>
         <b-navbar-item href="https://evgenykon.github.io/quinto-circle/">
           Quinto Circle
         </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/wall-area-calculator">
-          Wall Area Calculator
-        </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/nukeopp">
-          Nuclear Opposition
-        </b-navbar-item>
-        <b-navbar-item href="https://evgenykon.github.io/english-grammar-trainer/">
-          English Grammar Trainer
-        </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/sound-mixer">
-          Sound Mixer Repo
-        </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/mma-prediction">
-          MMA Prediction
-        </b-navbar-item>
-        <b-navbar-item href="https://evgenykon.github.io/interview-trainer">
-          Interview Trainer
-        </b-navbar-item>
-        <b-navbar-item href="/demos/allow-list">
-          AllowList site checker
-        </b-navbar-item>
         <b-navbar-item href="https://evgenykon.github.io/three-body-problem/">
           Three Body Problem
-        </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/game-helper">
-          Game Helper
         </b-navbar-item>
       </b-navbar-dropdown>
     </template>
