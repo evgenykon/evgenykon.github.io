@@ -23,8 +23,8 @@
         <b-navbar-item href="https://github.com/evgenykon/corporate-game">
           Game for team buildings
         </b-navbar-item>
-        <b-navbar-item href="https://github.com/evgenykon/quinto-circle">
-          CSS Quinto circle
+        <b-navbar-item href="https://evgenykon.github.io/quinto-circle/">
+          Quinto Circle
         </b-navbar-item>
         <b-navbar-item href="https://github.com/evgenykon/wall-area-calculator">
           Wall Area Calculator
