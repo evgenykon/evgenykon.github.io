@@ -8,6 +8,9 @@
     <template #start>
       <g-link to="/experience/" class="navbar-item">My experience 👨‍💻</g-link>
       <b-navbar-dropdown label="Pet Projects 👾">
+        <b-navbar-item href="https://evgenykon.github.io/effus-ui/">
+          Effus UI
+        </b-navbar-item>
         <b-navbar-item href="https://evgenykon.github.io/quinto-circle/">
           Quinto Circle
         </b-navbar-item>
