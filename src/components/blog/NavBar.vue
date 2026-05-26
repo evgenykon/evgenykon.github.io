@@ -17,6 +17,9 @@
         <b-navbar-item href="https://evgenykon.github.io/three-body-problem/">
           Three Body Problem
         </b-navbar-item>
+        <b-navbar-item href="https://evgenykon.github.io/life-game-fork/">
+          'Life' browser game
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
     <template #end>
