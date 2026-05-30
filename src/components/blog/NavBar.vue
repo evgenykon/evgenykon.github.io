@@ -20,6 +20,9 @@
         <b-navbar-item href="https://evgenykon.github.io/life-game-fork/">
           'Life' browser game
         </b-navbar-item>
+        <b-navbar-item href="https://evgenykon.github.io/nukeopp/">
+          NukeOpp — ядерная угроза
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
     <template #end>
