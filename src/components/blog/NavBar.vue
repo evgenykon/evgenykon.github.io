@@ -21,7 +21,7 @@
           'Life' browser game
         </b-navbar-item>
         <b-navbar-item href="https://evgenykon.github.io/nukeopp/">
-          NukeOpp — ядерная угроза
+          Nuclear Opposition
         </b-navbar-item>
       </b-navbar-dropdown>
     </template>
