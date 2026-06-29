@@ -23,6 +23,9 @@
         <b-navbar-item href="https://evgenykon.github.io/nukeopp/">
           Nuclear Opposition
         </b-navbar-item>
+        <b-navbar-item href="https://evgenykon.github.io/alert-data-to-sound-mapping/">
+          Astronomy Alert Notificator
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
     <template #end>
