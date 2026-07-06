@@ -26,6 +26,9 @@
         <b-navbar-item href="https://evgenykon.github.io/alert-data-to-sound-mapping/">
           Astronomy Alert Notificator
         </b-navbar-item>
+          <b-navbar-item href="https://evgenykon.github.io/escape-map-game/">
+          Escape Map Game
+        </b-navbar-item>
       </b-navbar-dropdown>
     </template>
     <template #end>
