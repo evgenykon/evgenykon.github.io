@@ -14,22 +14,14 @@
   --text: #f1efea;
   --text-dim: #d3d1cb;
   --muted: #918f8a;
-  --accent: #ffcf4d;
-  --accent-2: #fff3b8;
-  --accent-soft: rgba(255, 207, 77, 0.14);
-  --gold-sheen: linear-gradient(
-    100deg,
-    #b07d16 0%,
-    #ffcf4d 18%,
-    #fff6cc 34%,
-    #ffd76b 50%,
-    #a86e10 68%,
-    #ffcf4d 84%,
-    #fff3b8 100%
-  );
-  --snow: #fff6dc;
+  --accent: #8f83c9;
+  --accent-2: #a99edb;
+  --accent-soft: rgba(143, 131, 201, 0.13);
+  --green: #4f7d63;
+  --green-soft: rgba(79, 125, 99, 0.16);
+  --snow: #ded9ef;
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.6);
-  --glow: 0 0 44px rgba(255, 207, 77, 0.32);
+  --glow: 0 0 0 rgba(0, 0, 0, 0);
   --grid-line: rgba(255, 255, 255, 0.06);
 }
 
@@ -45,22 +37,14 @@
   --text: #1a1917;
   --text-dim: #3b3934;
   --muted: #6d6a63;
-  --accent: #b8860f;
-  --accent-2: #d9a520;
-  --accent-soft: rgba(255, 207, 77, 0.22);
-  --gold-sheen: linear-gradient(
-    100deg,
-    #a8760c 0%,
-    #e0a516 20%,
-    #ffe9a3 36%,
-    #f0b71f 52%,
-    #8f6108 70%,
-    #e0a516 86%,
-    #ffe9a3 100%
-  );
+  --accent: #6f5fa8;
+  --accent-2: #8f83c9;
+  --accent-soft: rgba(111, 95, 168, 0.12);
+  --green: #3f6b52;
+  --green-soft: rgba(63, 107, 82, 0.14);
   --snow: #ffffff;
   --shadow: 0 22px 50px rgba(40, 36, 24, 0.16);
-  --glow: 0 0 30px rgba(168, 134, 31, 0.18);
+  --glow: 0 0 0 rgba(0, 0, 0, 0);
   --grid-line: rgba(30, 28, 24, 0.06);
 }
 
@@ -209,13 +193,10 @@ p {
   display: grid;
   place-items: center;
   border-radius: 8px;
-  background: var(--gold-sheen);
-  background-size: 220% 100%;
-  animation: gold-sweep 6s linear infinite;
-  color: #241a04;
+  background: var(--accent);
+  color: #14121c;
   font-size: 0.8rem;
   font-weight: 800;
-  box-shadow: var(--glow);
 }
 
 .nav {
@@ -300,40 +281,27 @@ p {
 
 .btn:hover {
   transform: translateY(-2px);
-  border-color: var(--accent);
-  box-shadow: var(--glow);
+  border-color: var(--green);
   opacity: 1;
 }
 
 .btn-primary {
-  background: var(--gold-sheen);
-  background-size: 220% 100%;
-  animation: gold-sweep 5.5s linear infinite;
+  background: var(--accent);
   border-color: transparent;
-  color: #241a04;
-  box-shadow: 0 8px 26px rgba(255, 207, 77, 0.22);
+  color: #14121c;
 }
 
 :root[data-theme="light"] .btn-primary {
   color: #fffdf2;
 }
 
-@keyframes gold-sweep {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 220% 50%;
-  }
-}
-
 .chip {
   display: inline-block;
   padding: 0.22rem 0.6rem;
   border-radius: 999px;
-  border: 1px solid var(--border);
-  background: var(--accent-soft);
-  color: var(--text-dim);
+  border: 1px solid color-mix(in srgb, var(--green) 45%, transparent);
+  background: var(--green-soft);
+  color: color-mix(in srgb, var(--text) 80%, var(--green));
   font-size: 0.76rem;
   font-weight: 500;
   white-space: nowrap;

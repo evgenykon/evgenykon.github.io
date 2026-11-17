@@ -1,9 +1,10 @@
 /**
- * Liquid background: soft drifting blobs + suspended particles.
+ * Liquid background: soft drifting volumes + suspended particles in two muted
+ * tones (lilac + deep green).
  *
  * Scrolling gives the field inertia — a particle keeps its old velocity for a
- * moment, then catches up with the page, so the whole field lags behind the
- * content and flows up (or down) after the scroll stops.
+ * moment, then catches up with the page, so the field lags behind the content
+ * and flows up (or down) after the scroll stops.
  */
 
 interface Particle {
@@ -17,6 +18,7 @@ interface Particle {
   drift: number;
   phase: number;
   twinkle: number;
+  tone: 0 | 1;
 }
 
 interface Blob {
@@ -28,6 +30,14 @@ interface Blob {
   vx: number;
   alpha: number;
   phase: number;
+  tone: 0 | 1;
+}
+
+interface Trio {
+  deep: HTMLCanvasElement;
+  mid: HTMLCanvasElement;
+  pale: HTMLCanvasElement;
+  spark: HTMLCanvasElement;
 }
 
 const TAU = Math.PI * 2;
@@ -56,18 +66,32 @@ export function initFluidBackground(): void {
   let H = 0;
   let dpr = 1;
 
-  let particleSprite = makeSprite('255,244,205');
-  let goldDeep = makeSprite('190,132,20');
-  let goldMid = makeSprite('255,199,60');
-  let goldPale = makeSprite('255,243,190');
+  /* tone 0 = muted lilac, tone 1 = deep green */
+  const sprites: Trio[] = [];
 
   const particles: Particle[] = [];
   const blobs: Blob[] = [];
 
   const rand = (a: number, b: number) => a + Math.random() * (b - a);
 
+  function buildSprites(): void {
+    const light = root.dataset.theme === 'light';
+    sprites[0] = {
+      deep: makeSprite(light ? '86,78,124' : '74,68,110'),
+      mid: makeSprite(light ? '126,116,176' : '126,116,176'),
+      pale: makeSprite(light ? '196,190,225' : '196,190,225'),
+      spark: makeSprite(light ? '70,62,105' : '214,208,236'),
+    };
+    sprites[1] = {
+      deep: makeSprite(light ? '31,58,46' : '28,52,41'),
+      mid: makeSprite(light ? '63,107,82' : '79,125,99'),
+      pale: makeSprite(light ? '150,190,168' : '159,199,177'),
+      spark: makeSprite(light ? '44,74,58' : '198,224,208'),
+    };
+  }
+
   function seed(): void {
-    const density = Math.min(190, Math.max(60, Math.round((W * H) / 13000)));
+    const density = Math.min(420, Math.max(140, Math.round((W * H) / 4800)));
     particles.length = 0;
     blobs.length = 0;
 
@@ -84,20 +108,22 @@ export function initFluidBackground(): void {
         drift: rand(0.06, 0.3),
         phase: rand(0, TAU),
         twinkle: rand(0.5, 2.4),
+        tone: Math.random() < 0.55 ? 0 : 1,
       });
     }
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 12; i++) {
       const depth = rand(0.1, 0.5);
       blobs.push({
         x: rand(0, W),
         y: rand(0, H),
-        r: rand(120, 320),
+        r: rand(120, 330),
         depth,
         vy: 0,
         vx: rand(-0.05, 0.05),
-        alpha: rand(0.035, 0.08),
+        alpha: rand(0.022, 0.05),
         phase: rand(0, TAU),
+        tone: Math.random() < 0.5 ? 0 : 1,
       });
     }
   }
@@ -114,33 +140,22 @@ export function initFluidBackground(): void {
     seed();
   }
 
-  /* theme change → refresh the sprite tint */
-  function retint(): void {
-    const light = root.dataset.theme === 'light';
-    particleSprite = makeSprite(light ? '60,44,10' : '255,244,205');
-    goldDeep = makeSprite(light ? '150,102,10' : '190,132,20');
-    goldMid = makeSprite(light ? '230,168,22' : '255,199,60');
-    goldPale = makeSprite(light ? '255,224,140' : '255,243,190');
-  }
-
   let lastScroll = window.scrollY;
-  let scrollVelocity = 0; // px per frame, smoothed
+  let scrollVelocity = 0;
   let t = 0;
 
   function frame(): void {
     const sy = window.scrollY;
     const delta = sy - lastScroll;
     lastScroll = sy;
-    /* heavy smoothing = the fluid does not react instantly to the wheel */
     scrollVelocity += (delta - scrollVelocity) * 0.1;
     if (Math.abs(scrollVelocity) < 0.01) scrollVelocity = 0;
     t += 0.016;
 
     ctx!.clearRect(0, 0, W, H);
-    ctx!.globalCompositeOperation = 'lighter';
-    if (root.dataset.theme === 'light') ctx!.globalCompositeOperation = 'source-over';
+    ctx!.globalCompositeOperation = root.dataset.theme === 'light' ? 'source-over' : 'lighter';
 
-    /* big soft volumes of liquid metal */
+    /* soft volumes: deep body + slowly breathing lighter core */
     for (const b of blobs) {
       const target = -scrollVelocity * b.depth * 0.42;
       b.vy += (target - b.vy) * 0.035;
@@ -149,24 +164,20 @@ export function initFluidBackground(): void {
       if (b.y < -b.r) b.y = H + b.r;
       if (b.y > H + b.r) b.y = -b.r;
 
-      /* the sheen travels across the blob: deep gold body + moving bright core */
-      const pulse = 0.5 + 0.5 * Math.sin(t * 0.6 + b.phase * 2);
-      ctx!.globalAlpha = b.alpha * (0.75 + 0.55 * pulse);
-      ctx!.drawImage(goldDeep, b.x - b.r, b.y - b.r, b.r * 2, b.r * 2);
+      const s = sprites[b.tone];
+      const pulse = 0.5 + 0.5 * Math.sin(t * 0.45 + b.phase * 2);
 
-      ctx!.globalAlpha = b.alpha * (0.5 + 1.1 * pulse);
-      const coreR = b.r * (0.45 + 0.18 * pulse);
-      const cx = b.x + Math.sin(t * 0.5 + b.phase) * b.r * 0.25;
-      ctx!.drawImage(goldMid, cx - coreR, b.y - coreR * 0.8, coreR * 2, coreR * 1.6);
+      ctx!.globalAlpha = b.alpha * (0.8 + 0.5 * pulse);
+      ctx!.drawImage(s.deep, b.x - b.r, b.y - b.r, b.r * 2, b.r * 2);
 
-      ctx!.globalAlpha = b.alpha * pulse * 0.9;
-      const glintR = b.r * 0.3;
-      ctx!.drawImage(goldPale, cx - glintR, b.y - glintR * 0.7, glintR * 2, glintR * 1.4);
+      ctx!.globalAlpha = b.alpha * (0.45 + 0.9 * pulse);
+      const coreR = b.r * (0.45 + 0.15 * pulse);
+      const cx = b.x + Math.sin(t * 0.4 + b.phase) * b.r * 0.22;
+      ctx!.drawImage(s.mid, cx - coreR, b.y - coreR * 0.85, coreR * 2, coreR * 1.7);
     }
 
     /* suspended specks */
     for (const p of particles) {
-      /* the scroll drags the fluid: closer particles follow faster, all lag behind */
       const target = -scrollVelocity * p.depth * 1.15;
       p.vy += (target - p.vy) * (0.025 + p.depth * 0.03);
       p.y += p.vy - p.drift * 0.35;
@@ -184,8 +195,9 @@ export function initFluidBackground(): void {
 
       const size = p.r * 8;
       const twinkle = 0.55 + 0.45 * Math.sin(t * p.twinkle + p.phase);
-      ctx!.globalAlpha = Math.min(1, p.alpha * (0.6 + 0.9 * twinkle));
-      ctx!.drawImage(particleSprite, p.x - size / 2, p.y - size / 2, size, size);
+      ctx!.globalAlpha = Math.min(1, p.alpha * (0.6 + 0.8 * twinkle));
+      const sprite = sprites[p.tone].spark;
+      ctx!.drawImage(sprite, p.x - size / 2, p.y - size / 2, size, size);
     }
 
     ctx!.globalAlpha = 1;
@@ -193,12 +205,15 @@ export function initFluidBackground(): void {
     requestAnimationFrame(frame);
   }
 
+  buildSprites();
   resize();
-  retint();
   /* debug handle: lets a test read particle positions from the console */
   (window as unknown as Record<string, unknown>).__fluidParticles = particles;
+
   window.addEventListener('resize', resize);
-  new MutationObserver(retint).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+  new MutationObserver(() => {
+    buildSprites();
+  }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 
   requestAnimationFrame(frame);
 }
