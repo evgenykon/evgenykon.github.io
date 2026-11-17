@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import { SITE } from '../data/site';
+import LangSwitch from '../components/LangSwitch.astro';
 import { t as dict, defaultLang, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -81,9 +82,7 @@ const altEn = new URL('/', site).href;
 
           <a href="https://github.com/evgenykon" target="_blank" rel="noopener">{t.navGithub}</a>
 
-          <a class="lang-switch" href={t.switchHref} hreflang={t.switchHref === '/ru/' ? 'ru' : 'en'}>
-            {t.switchTo}
-          </a>
+          <LangSwitch lang={lang === 'ru' ? 'en' : 'ru'} href={t.switchHref} />
         </nav>
       </div>
     </header>

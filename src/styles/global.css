@@ -335,17 +335,28 @@ p {
 
 .lang-switch {
   margin-left: 0.35rem;
-  padding: 0.34rem 0.6rem;
-  border-radius: 8px;
+  width: 34px;
+  height: 24px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 6px;
   border: 1px solid var(--border-strong);
-  color: var(--text-dim);
-  font-size: 0.8rem;
-  letter-spacing: 0.02em;
+  background: var(--card);
+  overflow: hidden;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.lang-switch svg {
+  width: 28px;
+  height: 18px;
+  display: block;
+  border-radius: 2px;
 }
 
 .lang-switch:hover {
-  color: var(--text);
   border-color: var(--green);
+  transform: translateY(-1px);
   opacity: 1;
 }
 
