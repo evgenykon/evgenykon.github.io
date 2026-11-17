@@ -75,18 +75,17 @@ export function initFluidBackground(): void {
   const rand = (a: number, b: number) => a + Math.random() * (b - a);
 
   function buildSprites(): void {
-    const light = root.dataset.theme === 'light';
     sprites[0] = {
-      deep: makeSprite(light ? '86,78,124' : '74,68,110'),
-      mid: makeSprite(light ? '126,116,176' : '126,116,176'),
-      pale: makeSprite(light ? '196,190,225' : '196,190,225'),
-      spark: makeSprite(light ? '70,62,105' : '214,208,236'),
+      deep: makeSprite('74,68,110'),
+      mid: makeSprite('126,116,176'),
+      pale: makeSprite('196,190,225'),
+      spark: makeSprite('214,208,236'),
     };
     sprites[1] = {
-      deep: makeSprite(light ? '31,58,46' : '28,52,41'),
-      mid: makeSprite(light ? '63,107,82' : '79,125,99'),
-      pale: makeSprite(light ? '150,190,168' : '159,199,177'),
-      spark: makeSprite(light ? '44,74,58' : '198,224,208'),
+      deep: makeSprite('28,52,41'),
+      mid: makeSprite('79,125,99'),
+      pale: makeSprite('159,199,177'),
+      spark: makeSprite('198,224,208'),
     };
   }
 
@@ -153,7 +152,7 @@ export function initFluidBackground(): void {
     t += 0.016;
 
     ctx!.clearRect(0, 0, W, H);
-    ctx!.globalCompositeOperation = root.dataset.theme === 'light' ? 'source-over' : 'lighter';
+    ctx!.globalCompositeOperation = 'lighter';
 
     /* soft volumes: deep body + slowly breathing lighter core */
     for (const b of blobs) {
@@ -211,9 +210,6 @@ export function initFluidBackground(): void {
   (window as unknown as Record<string, unknown>).__fluidParticles = particles;
 
   window.addEventListener('resize', resize);
-  new MutationObserver(() => {
-    buildSprites();
-  }).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
 
   requestAnimationFrame(frame);
 }

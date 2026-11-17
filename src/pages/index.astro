@@ -31,29 +31,6 @@ const cvMeta: Record<string, { label: string; href: string }> = {
           {SITE.topBanner.map((line) => <li>{line}</li>)}
         </ul>
       </div>
-
-      <div class="band-aside">
-        <dl class="band-stats">
-          <div>
-            <dt>Experience</dt>
-            <dd>15+ yrs</dd>
-          </div>
-          <div>
-            <dt>Notes</dt>
-            <dd>{posts.length}</dd>
-          </div>
-          <div>
-            <dt>Teams led</dt>
-            <dd>10 eng</dd>
-          </div>
-        </dl>
-
-        <div class="band-cta">
-          <a class="btn btn-primary" href="/experience/" data-cv-gated hidden>View CV</a>
-          <a class="btn" href="https://github.com/evgenykon" target="_blank" rel="noopener">GitHub</a>
-          <a class="btn" href="mailto:effusps@gmail.com">Email</a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -108,15 +85,6 @@ const cvMeta: Record<string, { label: string; href: string }> = {
     gap: clamp(1.2rem, 3vw, 2rem);
   }
 
-  .band-aside {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.2rem 1.8rem;
-    padding-top: 1.2rem;
-    border-top: 1px solid var(--border);
-  }
-
   h1 {
     font-size: clamp(1.9rem, 3.6vw, 2.7rem);
     line-height: 1.05;
@@ -150,33 +118,6 @@ const cvMeta: Record<string, { label: string; href: string }> = {
     border-radius: 2px;
     background: var(--accent);
     transform: rotate(45deg);
-  }
-
-  .band-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.4rem;
-    margin: 0;
-  }
-
-  .band-stats dt {
-    font-size: 0.64rem;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .band-stats dd {
-    margin: 0.1rem 0 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-
-  .band-cta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
   }
 
   .outro {
@@ -266,9 +207,6 @@ const cvMeta: Record<string, { label: string; href: string }> = {
     .band-inner {
       grid-template-columns: 1fr;
       align-items: start;
-    }
-    .band-stats {
-      gap: 1.1rem;
     }
   }
 </style>
