@@ -93,13 +93,13 @@ export function initSnowScene(): void {
       const { w, h } = cardSizes[i] ?? { w: 400, h: 200 };
       const d = s - i;
 
-      const centerY = H * 0.55 - (d - 0.5) * H * 0.92;
+      const centerY = H * 0.5 - (d - 0.5) * H * 0.66;
       const x = Math.max(28, (feedW - w) / 2) + (d - 0.5) * 26;
       const y = centerY - h / 2;
-      const rot = clamp(-(d - 0.5) * 3.4, -6, 6);
-      const sc = 1 - Math.min(0.07, Math.abs(d - 0.5) * 0.07);
+      const rot = clamp(-(d - 0.5) * 2.4, -4, 4);
+      const sc = 1 - Math.min(0.05, Math.abs(d - 0.5) * 0.05);
       const opacity =
-        clamp((d + 0.16) / 0.3, 0, 1) * clamp((0.98 - d) / 0.22, 0, 1);
+        clamp((d + 0.08) / 0.26, 0, 1) * clamp((1.06 - d) / 0.26, 0, 1);
 
       card.style.willChange = 'transform, opacity';
       card.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
@@ -131,11 +131,10 @@ export function initSnowScene(): void {
     }
 
     /* rider: idle sway + trick between the gates */
-    const reduceMotion = motionMq.matches;
     const sr = s + 0.5;
     const idx = Math.max(0, Math.floor(sr));
     const u = sr - idx;
-    const trickActive = !reduceMotion && idx > 0 && idx % 2 === 0;
+    const trickActive = idx > 0 && idx % 2 === 0;
     const from = 0.3;
     const to = 0.7;
     const tt = trickActive ? clamp((u - from) / (to - from), 0, 1) : 0;
