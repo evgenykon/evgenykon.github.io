@@ -1,44 +1,51 @@
 name: Deploy to GitHub Pages
 
+# Builds on GitHub Actions and publishes dist/ to the gh-pages branch,
+# which is what the repository's Pages source points at — no manual
+# settings change needed.
+
 on:
   push:
     branches: [astro, master]
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: pages
   cancel-in-progress: true
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npm install --no-audit --no-fund
-      - run: npm run build
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Build
+        run: npm run build
+
       - name: Verify output
         run: |
           test -f dist/index.html
           test -f dist/ru/index.html
+          test -f dist/experience/index.html
           du -sh dist
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+          find dist -maxdepth 1 -type d | sort
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: gh-pages
+          user_name: github-actions[bot]
+          user_email: github-actions[bot]@users.noreply.github.com
+          commit_message: 'deploy: ${{ github.sha }}'
