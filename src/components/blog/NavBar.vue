@@ -11,8 +11,8 @@
         <b-navbar-item href="https://evgenykon.github.io/effus-ui/">
           Effus UI
         </b-navbar-item>
-        <b-navbar-item href="https://evgenykon.github.io/quinto-circle/">
-          Quinto Circle
+        <b-navbar-item href="https://evgenykon.github.io/music-tools/">
+          Music Tools
         </b-navbar-item>
         <b-navbar-item href="https://evgenykon.github.io/three-body-problem/">
           Three Body Problem
