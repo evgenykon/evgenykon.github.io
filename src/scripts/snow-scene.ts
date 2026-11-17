@@ -99,7 +99,7 @@ export function initSnowScene(): void {
       const rot = clamp(-(d - 0.5) * 3.4, -6, 6);
       const sc = 1 - Math.min(0.07, Math.abs(d - 0.5) * 0.07);
       const opacity =
-        clamp((d + 0.18) / 0.32, 0, 1) * clamp((1.02 - d) / 0.24, 0, 1);
+        clamp((d + 0.16) / 0.3, 0, 1) * clamp((0.98 - d) / 0.22, 0, 1);
 
       card.style.willChange = 'transform, opacity';
       card.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(3)})`;
@@ -134,7 +134,7 @@ export function initSnowScene(): void {
     const sr = s + 0.5;
     const idx = Math.max(0, Math.floor(sr));
     const u = sr - idx;
-    const trickActive = idx % 2 === 0;
+    const trickActive = idx > 0 && idx % 2 === 0;
     const from = 0.3;
     const to = 0.7;
     const tt = trickActive ? clamp((u - from) / (to - from), 0, 1) : 0;
