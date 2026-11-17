@@ -1,21 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import SnowScene from '../components/SnowScene.astro';
+import BlogStream from '../components/BlogStream.astro';
 import { excerpt } from '../lib/format';
 import { SITE } from '../data/site';
 
-const all = await getCollection('blog');
-const posts = all
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .map((entry) => ({
-    id: entry.id,
-    title: entry.data.title,
-    date: entry.data.date,
-    img: entry.data.img ?? null,
-    body: entry.body,
-    excerpt: excerpt(entry.body, 148),
-  }));
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
 
 const cvs = (await getCollection('cv')).sort((a, b) => a.data.baseUrl!.localeCompare(b.data.baseUrl!));
 const cvMeta: Record<string, { label: string; href: string }> = {
@@ -29,6 +21,8 @@ const cvMeta: Record<string, { label: string; href: string }> = {
   title="DevBlog — Evgeny Konoplev"
   description="Personal page of Evgeny Konoplev: engineering notes, pet projects and CV."
 >
+  <span id="top"></span>
+
   <section class="band">
     <div class="wrap band-inner">
       <div class="band-copy">
@@ -64,7 +58,7 @@ const cvMeta: Record<string, { label: string; href: string }> = {
     </div>
   </section>
 
-  <SnowScene posts={posts} />
+  <BlogStream posts={posts} />
 
   <section class="wrap outro">
     <div class="outro-head">
@@ -100,7 +94,6 @@ const cvMeta: Record<string, { label: string; href: string }> = {
 </Base>
 
 <style>
-  /* ---- compact intro band: the feed starts right after it ---- */
   .band {
     position: relative;
     z-index: 1;
@@ -182,7 +175,6 @@ const cvMeta: Record<string, { label: string; href: string }> = {
     gap: 0.5rem;
   }
 
-  /* ---- outro ---- */
   .outro {
     margin-top: clamp(2.5rem, 6vw, 4.5rem);
   }

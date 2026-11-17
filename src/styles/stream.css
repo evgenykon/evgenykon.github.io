@@ -1,0 +1,390 @@
+/* ============================================================
+   Blog stream: full articles in flow + sticky rider rail
+   ============================================================ */
+.stream {
+  padding: 1.4rem 0 0;
+  position: relative;
+  z-index: 1;
+}
+
+.stream-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(260px, 30vw, 420px);
+  gap: clamp(1.4rem, 3.5vw, 3.2rem);
+  width: min(1240px, 100% - 2.5rem);
+  margin-inline: auto;
+  align-items: stretch;
+}
+
+.stream-main {
+  min-width: 0;
+  padding-bottom: 2rem;
+}
+
+/* ---------- one full article ---------- */
+.post-full {
+  scroll-margin-top: 88px;
+  max-width: 70ch;
+}
+
+.post-head {
+  position: relative;
+  padding-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.post-index {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+  margin-bottom: 0.55rem;
+}
+
+.post-meta .dot {
+  opacity: 0.5;
+}
+
+.post-full h2 {
+  font-size: clamp(1.45rem, 2.7vw, 2.05rem);
+  letter-spacing: -0.025em;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.post-full h2 a {
+  color: var(--text);
+}
+
+.post-full h2 a:hover {
+  color: var(--accent);
+  opacity: 1;
+}
+
+.post-hero {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  margin: 0 0 1.6rem;
+}
+
+.post-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.4rem;
+  font-size: 0.82rem;
+}
+
+.post-anchor {
+  color: var(--muted);
+}
+
+.post-anchor:hover {
+  color: var(--accent);
+}
+
+/* ---------- gap between articles (trick happens here) ---------- */
+.post-gap {
+  position: relative;
+  height: clamp(4.5rem, 10vh, 7.5rem);
+}
+
+.post-gap::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-strong), transparent 70%);
+}
+
+.post-gap::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: calc(50% - 3px);
+  width: 7px;
+  height: 7px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  transform: rotate(45deg);
+}
+
+/* ============================================================
+   Rider rail
+   ============================================================ */
+.rail {
+  position: relative;
+  height: 100%;
+}
+
+.rail-sticky {
+  position: sticky;
+  top: calc(var(--header-h, 64px) + 0.6rem);
+  height: calc(100vh - var(--header-h, 64px) - 1.4rem);
+  border-radius: 24px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background:
+    radial-gradient(120% 70% at 50% 0%, rgba(94, 231, 255, 0.07), transparent 62%),
+    linear-gradient(180deg, var(--bg-soft), var(--bg-deep));
+}
+
+.rail-trail {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  margin-left: -1.5px;
+  background-image: repeating-linear-gradient(180deg, var(--snow) 0 16px, transparent 16px 42px);
+  opacity: 0.35;
+  will-change: background-position;
+}
+
+.rail-edge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: linear-gradient(180deg, transparent, var(--border-strong) 18%, var(--border-strong) 82%, transparent);
+}
+
+.rail-edge.left {
+  left: 18%;
+}
+
+.rail-edge.right {
+  right: 18%;
+}
+
+.rail-gates {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  opacity: 0.55;
+}
+
+.rail-gate {
+  position: absolute;
+  left: 18%;
+  right: 18%;
+  top: 0;
+  height: 14px;
+  will-change: transform;
+}
+
+.rail-gate::before,
+.rail-gate::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  margin-top: -4px;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  border-radius: 2px;
+  transform: rotate(45deg);
+}
+
+.rail-gate::before {
+  left: 0;
+}
+
+.rail-gate::after {
+  right: 0;
+}
+
+.rail-snow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.rail-snow i {
+  position: absolute;
+  left: var(--x);
+  bottom: -10px;
+  width: var(--s);
+  height: var(--s);
+  border-radius: 50%;
+  background: var(--snow);
+  opacity: 0.3;
+  animation: rail-snow-fall var(--d) linear var(--dl) infinite;
+}
+
+@keyframes rail-snow-fall {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.35;
+  }
+  88% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translate3d(26px, -110%, 0);
+    opacity: 0;
+  }
+}
+
+.rider {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: clamp(200px, 20vw, 290px);
+  height: clamp(200px, 20vw, 290px);
+  margin: 0;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.rider-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 12px 26px rgba(0, 0, 0, 0.45));
+}
+
+.rider-svg [data-rider-body],
+.rider-svg [data-board] {
+  transform-origin: 110px 110px;
+  will-change: transform;
+}
+
+.rider-shadow {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 96px;
+  height: 38px;
+  margin: -19px 0 0 -48px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.5), transparent 70%);
+  filter: blur(4px);
+  z-index: -1;
+  will-change: transform, opacity;
+}
+
+.spray {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  width: 0;
+  height: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.spray span {
+  position: absolute;
+  left: -3.5px;
+  top: -3.5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--snow);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.trick-label {
+  position: absolute;
+  left: 50%;
+  top: calc(45% - 196px);
+  transform: translate(-50%, 0);
+  z-index: 4;
+  padding: 0.26rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  opacity: 0;
+  box-shadow: var(--glow);
+  will-change: opacity;
+}
+
+.rail-hud {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  pointer-events: none;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.12em;
+}
+
+.rail-hud b {
+  font-size: 1.15rem;
+  color: var(--text);
+  letter-spacing: 0;
+}
+
+.rail-hud i {
+  font-style: normal;
+  opacity: 0.7;
+}
+
+.hud-bar {
+  flex: 1;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--border-strong);
+  overflow: hidden;
+}
+
+.hud-bar span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+}
+
+@media (max-width: 899px) {
+  .stream-grid {
+    grid-template-columns: 1fr;
+    width: min(720px, 100% - 2rem);
+  }
+
+  .rail {
+    display: none;
+  }
+
+  .post-full {
+    max-width: none;
+  }
+}

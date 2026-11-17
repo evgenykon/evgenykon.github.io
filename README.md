@@ -18,25 +18,26 @@ No runtime framework ships to the browser — the page is HTML + CSS + two small
 
 ## Pages
 
-- **`/`** — hero + blog feed (16 posts) + CV switcher
-- **`/blog/<date>`** — post page, prose layout, prev/next navigation
+- **`/`** — compact intro band + the whole blog (all 16 posts, full text, one after another) + CV switcher
 - **`/experience/`** — fullstack CV
 - **`/experience-front/`** — frontend CV
 - **`/experience-back/`** — backend CV
 - **`/404`** — "off the trail"
 
+There are no separate post pages: every article is rendered in full in the feed and addressable by anchor (`/#post-20261009`).
+
 ## The snow scene
 
-On screens ≥ 960px the blog feed becomes a scroll scene:
+On screens ≥ 900px the blog gets a sticky rider rail on the right:
 
-- cards ride up the left track, one post per screen;
-- on the right lane a top-down snowboarder works the slope — the trail dashes, gate markers and snowfall move with the scroll;
-- between every second pair of posts the rider throws a trick: **360, backflip, indy grab, method, rodeo 720**, with a label and snow spray;
-- a HUD at the bottom shows the current post index and progress.
+- articles scroll past in a normal column, the rail stays pinned to the viewport;
+- a top-down snowboarder rides the rail — trail dashes, gate markers and snowfall move with the scroll;
+- each boundary between two articles is a `.post-gap`; when one crosses the rider's line the rider throws a trick: **360, backflip, indy grab, method, rodeo 720**, with a label and snow spray;
+- the HUD at the bottom shows the current article index and overall progress.
 
-Driven by one `requestAnimationFrame` loop over `getBoundingClientRect()` — no animation libraries.
+Driven by one `requestAnimationFrame` loop over `getBoundingClientRect()` — no animation libraries, no scroll hijacking, no `prefers-reduced-motion` gating.
 
-On mobile (or with `prefers-reduced-motion: reduce`) the scene is skipped entirely: the same cards render as a normal grid with an IntersectionObserver fade-in. The JS restores layout when the viewport crosses the breakpoint.
+On mobile the rail is simply hidden and the articles flow as a normal single column.
 
 ## Content
 
