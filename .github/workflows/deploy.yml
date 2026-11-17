@@ -1,8 +1,9 @@
 name: Deploy to GitHub Pages
 
-# Builds on GitHub Actions and publishes dist/ to the gh-pages branch,
-# which is what the repository's Pages source points at — no manual
-# settings change needed.
+# Builds on GitHub Actions and publishes dist/ to the gh-pages branch, which is
+# what the repository's Pages source points at. No marketplace actions are used:
+# the repository only allows actions owned by evgenykon, so checkout and publish
+# are done with plain git over the GITHUB_TOKEN.
 
 on:
   push:
@@ -19,12 +20,19 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: 22
+      - name: Checkout
+        run: |
+          set -euo pipefail
+          git init -q .
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth 1 origin "${GITHUB_SHA}"
+          git checkout -q FETCH_HEAD
+          git log --oneline -1
+          node -v
+          npm -v
 
       - name: Install dependencies
         run: npm install --no-audit --no-fund
@@ -34,6 +42,7 @@ jobs:
 
       - name: Verify output
         run: |
+          set -euo pipefail
           test -f dist/index.html
           test -f dist/ru/index.html
           test -f dist/experience/index.html
@@ -41,11 +50,15 @@ jobs:
           find dist -maxdepth 1 -type d | sort
 
       - name: Publish to gh-pages
-        uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
-          publish_branch: gh-pages
-          user_name: github-actions[bot]
-          user_email: github-actions[bot]@users.noreply.github.com
-          commit_message: 'deploy: ${{ github.sha }}'
+        run: |
+          set -euo pipefail
+          cd dist
+          touch .nojekyll
+          git init -q .
+          git checkout -q -b gh-pages
+          git add -A
+          git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -qm "deploy: ${GITHUB_SHA}"
+          git push -q --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" gh-pages
+          echo "published ${GITHUB_SHA} to gh-pages"

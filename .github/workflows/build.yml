@@ -1,5 +1,9 @@
 name: Build
 
+# The repository only allows actions from repositories owned by evgenykon,
+# so this workflow uses no `uses:` at all — plain shell + the preinstalled
+# Node.js on the runner.
+
 on:
   push:
     branches-ignore: [gh-pages]
@@ -16,11 +20,19 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: 22
+      - name: Checkout
+        run: |
+          set -euo pipefail
+          git init -q .
+          git remote add origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch -q --depth 1 origin "${GITHUB_SHA}"
+          git checkout -q FETCH_HEAD
+          git log --oneline -1
+          node -v
+          npm -v
 
       - name: Install dependencies
         run: npm install --no-audit --no-fund
@@ -30,15 +42,10 @@ jobs:
 
       - name: Verify output
         run: |
+          set -euo pipefail
           test -f dist/index.html
           test -f dist/ru/index.html
           test -f dist/experience/index.html
           grep -q 'lang="ru"' dist/ru/index.html
           du -sh dist
           find dist -maxdepth 1 -type d | sort
-
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: dist
-          path: dist
-          retention-days: 7
