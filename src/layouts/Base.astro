@@ -1,36 +1,47 @@
 ---
 import '../styles/global.css';
 import { SITE } from '../data/site';
+import { t as dict, defaultLang, type Lang } from '../i18n/ui';
 
 interface Props {
+  lang?: Lang;
   title?: string;
   description?: string;
   footerName?: string;
 }
 
-const {
-  title = 'DevBlog',
-  description = 'Engineering notes, pet projects and CV.',
-  footerName,
-} = Astro.props;
+const { lang = defaultLang, title, description, footerName } = Astro.props;
+const t = dict(lang);
 
+const pageTitle = title ?? t.title;
+const pageDescription = description ?? t.description;
+
+const base = lang === 'ru' ? '/ru/' : '/';
 const path = Astro.url.pathname;
 const isCurrent = (href: string) =>
   href === '/' ? path === '/' : path.startsWith(href.replace(/\/$/, '')) && href !== '/';
+
+const site = Astro.site ?? new URL('https://evgenykon.github.io');
+const altRu = new URL('/ru/', site).href;
+const altEn = new URL('/', site).href;
 ---
 
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang={t.htmlLang} data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
+    <link rel="alternate" hreflang="en" href={altEn} />
+    <link rel="alternate" hreflang="ru" href={altRu} />
+    <link rel="alternate" hreflang="x-default" href={altEn} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
+    <meta property="og:locale" content={t.htmlLang === 'ru' ? 'ru_RU' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="theme-color" content="#141414" />
   </head>
@@ -38,16 +49,16 @@ const isCurrent = (href: string) =>
     <canvas class="fluid" data-fluid aria-hidden="true"></canvas>
     <header class="site-header">
       <div class="wrap">
-        <a class="brand" href="/">
+        <a class="brand" href={base}>
           <span class="brand-mark" aria-hidden="true">EK</span>
           <span>evgeny.kon</span>
         </a>
 
         <nav class="nav" aria-label="Main">
-          <a href="/" aria-current={isCurrent('/') ? 'page' : undefined}>Blog</a>
+          <a href={base} aria-current={isCurrent('/') ? 'page' : undefined}>{t.navBlog}</a>
 
           <details class="nav-drop">
-            <summary>Pet Projects</summary>
+            <summary>{t.navProjects}</summary>
             <div class="nav-drop-menu">
               {
                 SITE.projects.map((project) => (
@@ -65,10 +76,14 @@ const isCurrent = (href: string) =>
             data-cv-gated
             hidden
           >
-            CV
+            {t.navCv}
           </a>
 
-          <a href="https://github.com/evgenykon" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://github.com/evgenykon" target="_blank" rel="noopener">{t.navGithub}</a>
+
+          <a class="lang-switch" href={t.switchHref} hreflang={t.switchHref === '/ru/' ? 'ru' : 'en'}>
+            {t.switchTo}
+          </a>
         </nav>
       </div>
     </header>
@@ -79,7 +94,7 @@ const isCurrent = (href: string) =>
 
     <footer class="site-footer">
       <div class="wrap">
-        <span>© {new Date().getFullYear()}{footerName ? ` ${footerName}` : ''} · built with Astro</span>
+        <span>© {new Date().getFullYear()}{footerName ? ` ${footerName}` : ''} · {t.builtWith}</span>
         <span>
           <a href="mailto:effusps@gmail.com">effusps@gmail.com</a>
           · <a href="https://github.com/evgenykon" target="_blank" rel="noopener">GitHub</a>

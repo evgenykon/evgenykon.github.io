@@ -1,17 +1,23 @@
 ---
 import '../styles/stream.css';
-import { render, type CollectionEntry } from 'astro:content';
+import { render } from 'astro:content';
 import { formatDate, isoDate, readingTime } from '../lib/format';
+import { t as dict, type Lang } from '../i18n/ui';
+import type { BlogEntry } from '../lib/posts';
 
 interface Props {
-  posts: CollectionEntry<'blog'>[];
+  posts: BlogEntry[];
+  lang: Lang;
 }
 
-const { posts } = Astro.props;
+const { posts, lang } = Astro.props;
+const t = dict(lang);
+const base = lang === 'ru' ? '/ru/' : '/';
+
 const items = await Promise.all(
   posts.map(async (post) => ({
     post,
-    Content: (await render(post)).Content,
+    Content: (await render(post as never)).Content,
   })),
 );
 const n = posts.length;
@@ -26,15 +32,15 @@ const n = posts.length;
           <article class="post-full" id={`post-${post.id}`} data-post>
             <header class="post-head">
               <div class="post-index">
-                {String(i + 1).padStart(2, '0')} / {String(n).padStart(2, '0')}
+                {String(i + 1).padStart(2, '0')} {t.postOf} {String(n).padStart(2, '0')}
               </div>
               <div class="post-meta">
-                <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+                <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date, lang)}</time>
                 <span class="dot">·</span>
-                <span>{readingTime(post.body)} min read</span>
+                <span>{readingTime(post.body)} {t.minRead}</span>
               </div>
               <h2>
-                <a href={`#post-${post.id}`}>{post.data.title}</a>
+                <a href={`${base}#post-${post.id}`}>{post.data.title}</a>
               </h2>
             </header>
 
@@ -45,10 +51,10 @@ const n = posts.length;
             </div>
 
             <footer class="post-foot">
-              <a class="post-anchor" href={`#post-${post.id}`}>
-                #{String(i + 1).padStart(2, '0')} · {formatDate(post.data.date)}
+              <a class="post-anchor" href={`${base}#post-${post.id}`}>
+                #{String(i + 1).padStart(2, '0')} · {formatDate(post.data.date, lang)}
               </a>
-              <a class="post-anchor" href="#top">back to top ↑</a>
+              <a class="post-anchor" href="#top">{t.backToTop}</a>
             </footer>
           </article>
         </>

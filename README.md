@@ -39,6 +39,22 @@ Driven by one `requestAnimationFrame` loop over `getBoundingClientRect()` — no
 
 On mobile the rail is simply hidden and the articles flow as a normal single column.
 
+## Languages
+
+The site is bilingual: English at `/`, Russian at `/ru/`, with a switcher in the header and
+`hreflang` alternates.
+
+- UI strings live in `src/i18n/ui.ts` (`t(lang)` returns the dictionary: nav labels, "min read",
+  CV copy, intro lines).
+- Posts have two collections: `src/content/blog/` (EN) and `src/content/blog-ru/` (RU) — the same
+  file names, so `20261117.md` exists in both; `getPosts(lang)` in `src/lib/posts.ts` picks the
+  right one and sorts by date.
+- Adding a post means adding two files (EN + RU). Dates are formatted per locale.
+- The homepage is one component (`src/components/HomePage.astro`) rendered by `/index.astro`
+  and `/ru/index.astro`.
+
+CV pages are English-only for now and are reachable from both languages.
+
 ## Content
 
 Markdown lives in `src/content/`:

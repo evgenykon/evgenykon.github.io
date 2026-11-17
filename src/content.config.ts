@@ -11,6 +11,16 @@ const blog = defineCollection({
   }),
 });
 
+const blogRu = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog-ru' }),
+  schema: z.object({
+    type: z.string().optional(),
+    title: z.string(),
+    date: z.coerce.date(),
+    img: z.string().nullable().optional(),
+  }),
+});
+
 const skill = z.object({ name: z.string(), rate: z.number() });
 const job = z.object({
   title: z.string(),
@@ -50,4 +60,4 @@ const cv = defineCollection({
   }),
 });
 
-export const collections = { blog, cv };
+export const collections = { blog, blogRu, cv };

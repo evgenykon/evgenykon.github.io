@@ -333,6 +333,22 @@ p {
   }
 }
 
+.lang-switch {
+  margin-left: 0.35rem;
+  padding: 0.34rem 0.6rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+.lang-switch:hover {
+  color: var(--text);
+  border-color: var(--green);
+  opacity: 1;
+}
+
 /* ============================================================
    Footer
    ============================================================ */

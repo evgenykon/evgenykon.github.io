@@ -4,6 +4,11 @@ const usePolling = process.env.CHOKIDAR_USEPOLLING === '1';
 
 export default defineConfig({
   site: 'https://evgenykon.github.io',
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en', 'ru'],
+    routing: { prefixDefaultLocale: false },
+  },
   build: {
     format: 'directory',
   },
