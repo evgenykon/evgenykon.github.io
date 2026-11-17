@@ -34,7 +34,7 @@ jobs:
           test -f dist/index.html
           test -f dist/ru/index.html
           test -f dist/experience/index.html
-          grep -q "ДевБлог" dist/ru/index.html
+          grep -q 'lang="ru"' dist/ru/index.html
           du -sh dist
           find dist -maxdepth 1 -type d | sort
 

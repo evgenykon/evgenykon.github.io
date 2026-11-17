@@ -45,7 +45,7 @@ export const ui = {
     navGithub: 'GitHub',
     switchTo: 'English',
     switchHref: '/',
-    title: 'ДевБлог',
+    title: 'DevBlog',
     description: 'Инженерные заметки, пет-проекты и резюме.',
     minRead: 'мин чтения',
     backToTop: 'наверх ↑',
