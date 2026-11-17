@@ -25,11 +25,16 @@
 
 .post-index {
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.22em;
-  color: var(--accent);
   margin-bottom: 0.5rem;
   font-variant-numeric: tabular-nums;
+  background: var(--gold-sheen);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gold-sweep 7s linear infinite;
 }
 
 .post-meta {
@@ -109,12 +114,15 @@
   content: '';
   position: absolute;
   left: 0;
-  top: calc(50% - 3px);
-  width: 7px;
-  height: 7px;
+  top: calc(50% - 3.5px);
+  width: 8px;
+  height: 8px;
   border-radius: 2px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  background: var(--gold-sheen);
+  background-size: 220% 100%;
+  animation: gold-sweep 6s linear infinite;
   transform: rotate(45deg);
+  box-shadow: 0 0 10px rgba(255, 207, 77, 0.5);
 }
 
 @media (max-width: 640px) {

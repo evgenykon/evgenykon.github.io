@@ -14,12 +14,22 @@
   --text: #f1efea;
   --text-dim: #d3d1cb;
   --muted: #918f8a;
-  --accent: #d4af37;
-  --accent-2: #f0cf7a;
-  --accent-soft: rgba(212, 175, 55, 0.12);
-  --snow: #f7f3e6;
+  --accent: #ffcf4d;
+  --accent-2: #fff3b8;
+  --accent-soft: rgba(255, 207, 77, 0.14);
+  --gold-sheen: linear-gradient(
+    100deg,
+    #b07d16 0%,
+    #ffcf4d 18%,
+    #fff6cc 34%,
+    #ffd76b 50%,
+    #a86e10 68%,
+    #ffcf4d 84%,
+    #fff3b8 100%
+  );
+  --snow: #fff6dc;
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.6);
-  --glow: 0 0 40px rgba(212, 175, 55, 0.22);
+  --glow: 0 0 44px rgba(255, 207, 77, 0.32);
   --grid-line: rgba(255, 255, 255, 0.06);
 }
 
@@ -35,9 +45,19 @@
   --text: #1a1917;
   --text-dim: #3b3934;
   --muted: #6d6a63;
-  --accent: #a8861f;
-  --accent-2: #c8a441;
-  --accent-soft: rgba(168, 134, 31, 0.12);
+  --accent: #b8860f;
+  --accent-2: #d9a520;
+  --accent-soft: rgba(255, 207, 77, 0.22);
+  --gold-sheen: linear-gradient(
+    100deg,
+    #a8760c 0%,
+    #e0a516 20%,
+    #ffe9a3 36%,
+    #f0b71f 52%,
+    #8f6108 70%,
+    #e0a516 86%,
+    #ffe9a3 100%
+  );
   --snow: #ffffff;
   --shadow: 0 22px 50px rgba(40, 36, 24, 0.16);
   --glow: 0 0 30px rgba(168, 134, 31, 0.18);
@@ -189,8 +209,10 @@ p {
   display: grid;
   place-items: center;
   border-radius: 8px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #04121a;
+  background: var(--gold-sheen);
+  background-size: 220% 100%;
+  animation: gold-sweep 6s linear infinite;
+  color: #241a04;
   font-size: 0.8rem;
   font-weight: 800;
   box-shadow: var(--glow);
@@ -284,13 +306,25 @@ p {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  background: var(--gold-sheen);
+  background-size: 220% 100%;
+  animation: gold-sweep 5.5s linear infinite;
   border-color: transparent;
-  color: #141414;
+  color: #241a04;
+  box-shadow: 0 8px 26px rgba(255, 207, 77, 0.22);
 }
 
 :root[data-theme="light"] .btn-primary {
-  color: #ffffff;
+  color: #fffdf2;
+}
+
+@keyframes gold-sweep {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 220% 50%;
+  }
 }
 
 .chip {
@@ -469,11 +503,5 @@ p {
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
-  }
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    transition-duration: 0.001ms !important;
   }
 }
