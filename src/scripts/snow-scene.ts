@@ -131,10 +131,11 @@ export function initSnowScene(): void {
     }
 
     /* rider: idle sway + trick between the gates */
+    const reduceMotion = motionMq.matches;
     const sr = s + 0.5;
     const idx = Math.max(0, Math.floor(sr));
     const u = sr - idx;
-    const trickActive = idx > 0 && idx % 2 === 0;
+    const trickActive = !reduceMotion && idx > 0 && idx % 2 === 0;
     const from = 0.3;
     const to = 0.7;
     const tt = trickActive ? clamp((u - from) / (to - from), 0, 1) : 0;
@@ -217,7 +218,9 @@ export function initSnowScene(): void {
      Mode switching
      --------------------------------------------------------------- */
   function applyMode(): void {
-    const shouldEnable = desktopMq.matches && !motionMq.matches;
+    // The scene is layout, not decoration: it stays on for any wide viewport.
+    // `prefers-reduced-motion` only switches the tricks/sway off (see frame()).
+    const shouldEnable = desktopMq.matches;
 
     if (shouldEnable === enabled) {
       if (enabled) {
