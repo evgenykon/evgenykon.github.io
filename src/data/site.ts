@@ -10,7 +10,7 @@ export const SITE = {
   bottom: 'Right now I just want to have my personal page to share my CV and my ideas.',
   projects: [
     { label: 'Effus UI', href: 'https://evgenykon.github.io/effus-ui/' },
-    { label: 'Quinto Circle', href: 'https://evgenykon.github.io/quinto-circle/' },
+    { label: 'Music Tools', href: 'https://evgenykon.github.io/music-tools/' },
     { label: 'Three Body Problem', href: 'https://evgenykon.github.io/three-body-problem/' },
     { label: "'Life' browser game", href: 'https://evgenykon.github.io/life-game-fork/' },
     { label: 'Nuclear Opposition', href: 'https://evgenykon.github.io/nukeopp/' },
