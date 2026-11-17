@@ -19,12 +19,6 @@ const { posts } = Astro.props;
 const n = posts.length;
 ---
 
-<header class="scene-intro wrap">
-  <span class="eyebrow">DevBlog · {n} entries</span>
-  <h2>Ride the feed</h2>
-  <p>Newest first. On a big screen the rider works the slope between the notes — on a phone it's a plain feed.</p>
-</header>
-
 <section class="snow-stage" data-stage style={`--slides:${n + 1}`} id="feed">
   <div class="stage-sticky" data-sticky>
     <div class="stage-watermark" data-watermark aria-hidden="true">

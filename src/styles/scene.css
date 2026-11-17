@@ -12,25 +12,8 @@
   padding-bottom: 2rem;
 }
 
-.hero + .snow-stage,
-.scene-intro + .snow-stage {
-  margin-top: 1rem;
-}
-
-.scene-intro {
-  padding: clamp(1.5rem, 4vw, 2.6rem) 0 0;
-}
-
-.scene-intro h2 {
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  margin: 0.25rem 0 0.4rem;
-}
-
-.scene-intro p {
-  color: var(--muted);
-  max-width: 62ch;
-  font-size: 0.94rem;
-  margin: 0;
+.band + .snow-stage {
+  margin-top: 0.6rem;
 }
 
 .snow-stage .stage-sticky {
@@ -67,8 +50,8 @@
   z-index: 3;
   pointer-events: none;
   background:
-    linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 72%, transparent) 7%, transparent 22%),
-    linear-gradient(0deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 60%, transparent) 5%, transparent 16%);
+    linear-gradient(180deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 70%, transparent) 6%, transparent 17%),
+    linear-gradient(0deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 55%, transparent) 3%, transparent 9%);
 }
 
 /* ---------- drifting snow ---------- */
@@ -202,7 +185,7 @@
 
 .rider {
   position: absolute;
-  right: 10%;
+  left: 50%;
   top: 46%;
   width: 220px;
   height: 220px;
@@ -244,8 +227,9 @@
 
 .trick-label {
   position: absolute;
-  right: 5%;
-  top: calc(46% - 132px);
+  left: 50%;
+  top: calc(46% - 148px);
+  margin-left: 84px;
   z-index: 4;
   padding: 0.28rem 0.7rem;
   border-radius: 999px;
@@ -265,7 +249,7 @@
 
 .spray {
   position: absolute;
-  right: 10%;
+  left: 50%;
   top: 46%;
   width: 220px;
   height: 220px;
@@ -516,9 +500,10 @@
   will-change: transform, opacity;
 }
 
-.scene-mode .snow-stage:not(.scene-on) .stage-hud,
 .snow-stage:not(.scene-on) .stage-hud,
-.snow-stage:not(.scene-on) .stage-watermark {
+.snow-stage:not(.scene-on) .stage-watermark,
+.snow-stage:not(.scene-on) .stage-fog,
+.snow-stage:not(.scene-on) .snowfall {
   display: none;
 }
 
