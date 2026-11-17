@@ -18,8 +18,8 @@ const cvMeta: Record<string, { label: string; href: string }> = {
 ---
 
 <Base
-  title="DevBlog — Evgeny Konoplev"
-  description="Personal page of Evgeny Konoplev: engineering notes, pet projects and CV."
+  title="DevBlog"
+  description="Engineering notes, pet projects and CV."
 >
   <span id="top"></span>
 
@@ -49,7 +49,7 @@ const cvMeta: Record<string, { label: string; href: string }> = {
         </dl>
 
         <div class="band-cta">
-          <a class="btn btn-primary" href="/experience/">View CV</a>
+          <a class="btn btn-primary" href="/experience/" data-cv-gated hidden>View CV</a>
           <a class="btn" href="https://github.com/evgenykon" target="_blank" rel="noopener">GitHub</a>
           <a class="btn" href="mailto:effusps@gmail.com">Email</a>
         </div>
@@ -60,23 +60,25 @@ const cvMeta: Record<string, { label: string; href: string }> = {
   <BlogStream posts={posts} />
 
   <section class="wrap outro">
-    <div class="outro-head">
-      <span class="eyebrow">CV · 3 angles</span>
-      <h2>Same person, three focus points</h2>
-      <p>Full-stack lead, frontend architect and backend engineer — pick the one that matches the role.</p>
-    </div>
+    <div class="cv-block" data-cv-gated hidden>
+      <div class="outro-head">
+        <span class="eyebrow">CV · 3 angles</span>
+        <h2>Same person, three focus points</h2>
+        <p>Full-stack lead, frontend architect and backend engineer — pick the one that matches the role.</p>
+      </div>
 
-    <div class="cv-grid">
-      {
-        cvs.map((cv) => (
-          <a class="cv-card" href={cvMeta[cv.id]?.href ?? '/'}>
-            <span class="chip">{cvMeta[cv.id]?.label ?? cv.id}</span>
-            <h3>{cv.data.position}</h3>
-            <p>{excerpt(cv.data.annotation, 150)}</p>
-            <span class="cv-open">Open CV →</span>
-          </a>
-        ))
-      }
+      <div class="cv-grid">
+        {
+          cvs.map((cv) => (
+            <a class="cv-card" href={cvMeta[cv.id]?.href ?? '/'}>
+              <span class="chip">{cvMeta[cv.id]?.label ?? cv.id}</span>
+              <h3>{cv.data.position}</h3>
+              <p>{excerpt(cv.data.annotation, 150)}</p>
+              <span class="cv-open">Open CV →</span>
+            </a>
+          ))
+        }
+      </div>
     </div>
 
     <div class="elsewhere">

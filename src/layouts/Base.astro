@@ -4,16 +4,18 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
+  footerName?: string;
 }
 
 const {
-  title = 'Evgeny Kon — DevBlog & CV',
-  description = 'Personal page of Evgeny Konoplev: engineering notes, pet projects and CV. Built with Astro.',
+  title = 'DevBlog',
+  description = 'Engineering notes, pet projects and CV.',
+  footerName,
 } = Astro.props;
 
 const nav = [
   { href: '/', label: 'Blog' },
-  { href: '/experience/', label: 'CV' },
+  { href: '/experience/', label: 'CV', gated: true },
   { href: 'https://github.com/evgenykon', label: 'GitHub', external: true },
 ];
 
@@ -67,6 +69,8 @@ const isCurrent = (href: string) =>
                 aria-current={!item.external && isCurrent(item.href) ? 'page' : undefined}
                 target={item.external ? '_blank' : undefined}
                 rel={item.external ? 'noopener' : undefined}
+                data-cv-gated={item.gated ? '' : undefined}
+                hidden={item.gated || undefined}
               >
                 {item.label}
               </a>
@@ -94,7 +98,7 @@ const isCurrent = (href: string) =>
 
     <footer class="site-footer">
       <div class="wrap">
-        <span>© {new Date().getFullYear()} Evgeny Konoplev · built with Astro</span>
+        <span>© {new Date().getFullYear()}{footerName ? ` ${footerName}` : ''} · built with Astro</span>
         <span>
           <a href="mailto:effusps@gmail.com">effusps@gmail.com</a>
           · <a href="https://github.com/evgenykon" target="_blank" rel="noopener">GitHub</a>
@@ -107,6 +111,13 @@ const isCurrent = (href: string) =>
       import { initFluidBackground } from '../scripts/fluid-bg';
 
       initFluidBackground();
+
+      /* CV links are opt-in: they only appear with ?cv=1 in the URL */
+      if (new URLSearchParams(location.search).get('cv') === '1') {
+        document.querySelectorAll<HTMLElement>('[data-cv-gated]').forEach((el) => {
+          el.removeAttribute('hidden');
+        });
+      }
 
       const btn = document.querySelector('[data-theme-toggle]');
       const root = document.documentElement;

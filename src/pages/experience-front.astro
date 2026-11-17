@@ -7,6 +7,6 @@ const cv = await getEntry('cv', 'frontend');
 if (!cv) throw new Error('CV entry "frontend" not found');
 ---
 
-<Base title={`${cv.data.position} — Evgeny Konoplev`} description={cv.data.annotation}>
+<Base title={`${cv.data.position} — Evgeny Konoplev`} description={cv.data.annotation} footerName="Evgeny Konoplev">
   <CvView cv={cv} />
 </Base>
