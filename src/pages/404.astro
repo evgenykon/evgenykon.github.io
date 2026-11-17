@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="404 — off the trail" description="Page not found">
+  <section class="notfound wrap">
+    <p class="eyebrow">404</p>
+    <h1>Off the trail</h1>
+    <p>This slope doesn't exist — the rider went the other way.</p>
+    <a class="btn btn-primary" href="/">Back to the feed</a>
+  </section>
+</Base>
+
+<style>
+  .notfound {
+    padding: clamp(4rem, 12vw, 9rem) 0;
+    max-width: 46ch;
+  }
+  .notfound h1 {
+    font-size: clamp(2rem, 6vw, 3.4rem);
+    margin: 0.3rem 0 0.8rem;
+  }
+  .notfound p {
+    color: var(--muted);
+    margin-bottom: 1.6rem;
+  }
+</style>

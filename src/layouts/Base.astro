@@ -1,0 +1,124 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Evgeny Kon — DevBlog & CV',
+  description = 'Personal page of Evgeny Konoplev: engineering notes, pet projects and CV. Built with Astro.',
+} = Astro.props;
+
+const nav = [
+  { href: '/', label: 'Blog' },
+  { href: '/experience/', label: 'CV' },
+  { href: 'https://github.com/evgenykon', label: 'GitHub', external: true },
+];
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === '/' ? path === '/' : path.startsWith(href.replace(/\/$/, '')) && href !== '/';
+---
+
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#060911" />
+    <script is:inline>
+      (() => {
+        try {
+          const saved = localStorage.getItem('theme');
+          const system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          const theme = saved === 'light' || saved === 'dark' ? saved : system;
+          document.documentElement.dataset.theme = theme;
+          document
+            .querySelector('meta[name="theme-color"]')
+            ?.setAttribute('content', theme === 'light' ? '#f4f7fc' : '#060911');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">
+          <span class="brand-mark" aria-hidden="true">EK</span>
+          <span>evgeny.kon</span>
+        </a>
+
+        <nav class="nav" aria-label="Main">
+          {
+            nav.map((item) => (
+              <a
+                href={item.href}
+                aria-current={!item.external && isCurrent(item.href) ? 'page' : undefined}
+                target={item.external ? '_blank' : undefined}
+                rel={item.external ? 'noopener' : undefined}
+              >
+                {item.label}
+              </a>
+            ))
+          }
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch color theme">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4.2"></circle>
+              <path d="M12 2.6v2.2M12 19.2v2.2M2.6 12h2.2M19.2 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"></path>
+            </svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5Z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <span>© {new Date().getFullYear()} Evgeny Konoplev · built with Astro</span>
+        <span>
+          <a href="mailto:effusps@gmail.com">effusps@gmail.com</a>
+          · <a href="https://github.com/evgenykon" target="_blank" rel="noopener">GitHub</a>
+          · <a href="https://www.linkedin.com/in/evgeny-kon/" target="_blank" rel="noopener">LinkedIn</a>
+        </span>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.querySelector('[data-theme-toggle]');
+      const root = document.documentElement;
+      const meta = document.querySelector('meta[name="theme-color"]');
+
+      const sync = (theme: string) => {
+        root.dataset.theme = theme;
+        meta?.setAttribute('content', theme === 'light' ? '#f4f7fc' : '#060911');
+      };
+
+      btn?.addEventListener('click', () => {
+        const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+        sync(next);
+        try {
+          localStorage.setItem('theme', next);
+        } catch (e) {}
+      });
+    </script>
+  </body>
+</html>

@@ -1,20 +1,19 @@
 {
   "name": "evgenykon.github.io",
   "private": true,
+  "type": "module",
+  "version": "2.0.0",
   "scripts": {
-    "build": "gridsome build",
-    "develop": "gridsome develop",
-    "explore": "gridsome explore",
+    "dev": "astro dev --host",
+    "build": "astro build",
+    "preview": "astro preview --host",
     "predeploy": "npm run build",
     "deploy": "gh-pages -f -d dist"
   },
   "dependencies": {
-    "@gridsome/source-filesystem": "^0.6.2",
-    "@gridsome/transformer-remark": "^0.6.4",
-    "@gridsome/vue-remark": "^0.2.6",
-    "buefy": "^0.9.21",
-    "gh-pages": "^4.0.0",
-    "gridsome": "^0.7.0",
-    "moment": "^2.29.4"
+    "astro": "^5.13.5"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }

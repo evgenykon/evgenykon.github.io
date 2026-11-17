@@ -1,67 +1,86 @@
 # Evgeny.Kon page
 
-Personal portfolio, blog & CV site built with [Gridsome](https://gridsome.org/) (Vue 2 + GraphQL), [Buefy](https://buefy.org/) / [Bulma](https://bulma.io/), and [Remark](https://remark.js.org/). Hosted on [GitHub Pages](https://pages.github.com/).
+Personal portfolio, blog & CV site. Rebuilt on **Astro 5** (static, zero-client-framework) with a dark-first design and a scroll-driven snowboard scene.
 
-## Tech Stack
+Live: https://evgenykon.github.io/
+
+## Stack
 
 | Tool | Purpose |
 |---|---|
-| **Gridsome v0.7** | Vue-based static site generator |
-| **Vue 2** | Frontend framework |
-| **Buefy / Bulma** | UI components & CSS framework |
-| **GraphQL** | Gridsome data layer (page-query / static-query) |
-| **Remark** | Markdown → HTML transformer |
-| **Moment.js** | Date formatting |
+| **Astro 5** | Static site generator, content collections |
+| **TypeScript** | Scene engine + site logic |
+| **CSS custom properties** | Dark / light theme tokens |
 | **Docker** | Containerized dev environment |
-| **gh-pages** | Deploy to GitHub Pages |
-| **Yandex Metrica** | Web analytics |
+| **gh-pages / GitHub Actions** | Deploy to GitHub Pages |
+
+No runtime framework ships to the browser — the page is HTML + CSS + two small scripts (theme toggle, snow scene).
 
 ## Pages
 
-- **`/`** — Blog homepage with post list (7 posts, Jul 2022 – Dec 2023)
-- **`/experience/`** — Fullstack CV (Senior Full-Stack / Tech Lead)
-- **`/experience-front/`** — Frontend-focused CV
-- **`/experience-back/`** — Backend-focused CV
-- **`/demos/allow-list`** — URL availability checker tool
+- **`/`** — hero + blog feed (16 posts) + CV switcher
+- **`/blog/<date>`** — post page, prose layout, prev/next navigation
+- **`/experience/`** — fullstack CV
+- **`/experience-front/`** — frontend CV
+- **`/experience-back/`** — backend CV
+- **`/404`** — "off the trail"
+
+## The snow scene
+
+On screens ≥ 960px the blog feed becomes a scroll scene:
+
+- cards ride up the left track, one post per screen;
+- on the right lane a top-down snowboarder works the slope — the trail dashes, gate markers and snowfall move with the scroll;
+- between every second pair of posts the rider throws a trick: **360, backflip, indy grab, method, rodeo 720**, with a label and snow spray;
+- a HUD at the bottom shows the current post index and progress.
+
+Driven by one `requestAnimationFrame` loop over `getBoundingClientRect()` — no animation libraries.
+
+On mobile (or with `prefers-reduced-motion: reduce`) the scene is skipped entirely: the same cards render as a normal grid with an IntersectionObserver fade-in. The JS restores layout when the viewport crosses the breakpoint.
 
 ## Content
 
-All content lives in Markdown files under `docs/` with YAML frontmatter:
+Markdown lives in `src/content/`:
 
-- `docs/main.md` — homepage text & blog title
-- `docs/blog/*.md` — blog posts
-- `docs/cv/fullstack.md`, `frontend.md`, `backend.md` — CV data
+- `src/content/blog/*.md` — posts (`title`, `date`, `img` frontmatter)
+- `src/content/cv/{fullstack,frontend,backend}.md` — CV data (frontmatter only)
+- `src/data/site.ts` — hero texts
+
+Images and PDFs are in `public/blog-photos/` and `public/pdf/`, referenced as `/blog-photos/...` and `/pdf/...`.
 
 ## Development
 
-### With Docker (recommended)
-
 ```bash
-make build-images
-make dev
-# → http://localhost:13200/
+make build-images   # build the docker image
+make dev            # → http://localhost:13201/
 ```
 
-### Without Docker
-
-Requires Node.js 16–17.
+Without Docker (Node ≥ 20):
 
 ```bash
-yarn install
-yarn develop
-# → http://localhost:8080/
+npm install
+npm run dev         # → http://localhost:4321/
 ```
 
 ## Production build
 
 ```bash
-yarn build       # → dist/
+make build          # → dist/ (inside docker)
+# or
+npm run build
 ```
 
 ## Deploy to GitHub Pages
 
 ```bash
-make deploy      # or: npm run deploy
+make deploy         # builds and pushes dist/ to the gh-pages branch
 ```
 
-Pushes `dist/` to the `gh-pages` branch. The GitHub Pages setting must point to `gh-pages`.
+Pages must point at the `gh-pages` branch (legacy mode). A GitHub Actions workflow
+(`.github/workflows/deploy.yml`) is also provided — switch Pages → Source to
+**GitHub Actions** to use it instead.
+
+## Branches
+
+- `master` — the old Gridsome (Vue 2) implementation, kept as a backup;
+- `astro` — the Astro rewrite in this branch.

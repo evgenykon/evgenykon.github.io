@@ -1,0 +1,376 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  cv: CollectionEntry<'cv'>;
+}
+
+const { cv } = Astro.props;
+const d = cv.data;
+
+const tabs = [
+  { id: 'fullstack', label: 'Full-Stack', href: '/experience/' },
+  { id: 'frontend', label: 'Frontend', href: '/experience-front/' },
+  { id: 'backend', label: 'Backend', href: '/experience-back/' },
+];
+
+const stars = (rate: number) => '★'.repeat(rate) + '☆'.repeat(Math.max(0, 5 - rate));
+---
+
+<article class="cv wrap">
+  <nav class="cv-tabs" aria-label="CV variants">
+    {tabs.map((tab) => (
+      <a class="cv-tab" href={tab.href} aria-current={tab.id === cv.id ? 'page' : undefined}>
+        {tab.label}
+      </a>
+    ))}
+  </nav>
+
+  <header class="cv-head">
+    <div>
+      <p class="eyebrow">{d.location} · {d.age} years old</p>
+      <h1>{d.title}</h1>
+      <p class="cv-position">{d.position}</p>
+    </div>
+    <div class="cv-actions">
+      {d.pdf && <a class="btn btn-primary" href={d.pdf} download>Download PDF</a>}
+      {d.email && <a class="btn" href={`mailto:${d.email}`}>{d.email}</a>}
+    </div>
+  </header>
+
+  <p class="cv-annotation">{d.annotation}</p>
+
+  <div class="cv-body">
+    <aside class="cv-side">
+      <section>
+        <h2>Skills</h2>
+        <ul class="skills">
+          {d.skills.map((skill) => (
+            <li>
+              <span class="skill-name">{skill.name}</span>
+              <span class="skill-bar" aria-label={`${skill.rate} of 5`}>
+                <span class="skill-fill" style={`width:${(skill.rate / 5) * 100}%`}></span>
+              </span>
+              <span class="skill-stars" aria-hidden="true">{stars(skill.rate)}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {d.education && (
+        <section>
+          <h2>Education</h2>
+          <div class="edu">
+            <strong>{d.education.name}</strong>
+            <span>{d.education.degree}</span>
+            <span class="muted">{d.education.place} · {d.education.dates}</span>
+          </div>
+        </section>
+      )}
+
+      {d.achivements.length > 0 && (
+        <section>
+          <h2>Achievements</h2>
+          <ul class="achivements">
+            {d.achivements.map((item) => (
+              <li>
+                {item.url ? <a href={item.url} target="_blank" rel="noopener">{item.name}</a> : item.name}
+                {item.date && <span class="muted">{item.date}</span>}
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {d.socialLinks.length > 0 && (
+        <section>
+          <h2>Links</h2>
+          <ul class="socials">
+            {d.socialLinks.map((link) => (
+              <li>
+                <a href={link.url} target="_blank" rel="noopener">{link.print ?? link.id}</a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+    </aside>
+
+    <div class="cv-main">
+      <h2>Experience</h2>
+      <ol class="jobs">
+        {d.jobs.map((job) => (
+          <li class="job">
+            <div class="job-head">
+              <div>
+                <h3>{job.title}</h3>
+                <p class="job-role">{job.role}{job.place ? ` · ${job.place}` : ''}</p>
+              </div>
+              <span class="job-period">{job.period}</span>
+            </div>
+            {job.description && <p class="job-desc">{job.description}</p>}
+            {job.stack && job.stack.length > 0 && (
+              <ul class="stack">
+                {job.stack.map((tech) => <li>{tech}</li>)}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</article>
+
+<style>
+  .cv {
+    padding: clamp(2rem, 5vw, 3.4rem) 0 0;
+  }
+
+  .cv-tabs {
+    display: inline-flex;
+    gap: 0.3rem;
+    padding: 0.3rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    margin-bottom: 2rem;
+  }
+
+  .cv-tab {
+    padding: 0.42rem 0.95rem;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .cv-tab:hover {
+    color: var(--text);
+    opacity: 1;
+  }
+
+  .cv-tab[aria-current='page'] {
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #04121a;
+  }
+
+  .cv-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cv-head h1 {
+    font-size: clamp(2rem, 4.4vw, 3rem);
+    margin: 0.2rem 0 0.15rem;
+    letter-spacing: -0.035em;
+  }
+
+  .cv-position {
+    margin: 0;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 1.02rem;
+  }
+
+  .cv-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+  }
+
+  .cv-annotation {
+    font-size: 1.02rem;
+    color: var(--text-dim);
+    max-width: 88ch;
+    margin: 1.3rem 0 2rem;
+  }
+
+  .cv-body {
+    display: grid;
+    grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+    gap: clamp(1.4rem, 3vw, 3rem);
+    align-items: start;
+  }
+
+  .cv-side {
+    display: grid;
+    gap: 1.8rem;
+    padding: 1.4rem;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    position: sticky;
+    top: calc(var(--header-h, 64px) + 1rem);
+  }
+
+  h2 {
+    font-size: 0.74rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.8rem;
+  }
+
+  .skills {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .skill-name {
+    display: block;
+    font-size: 0.88rem;
+    margin-bottom: 0.28rem;
+    color: var(--text-dim);
+  }
+
+  .skill-bar {
+    display: block;
+    height: 5px;
+    border-radius: 999px;
+    background: var(--bg-deep);
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    display: block;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  }
+
+  .skill-stars {
+    display: none;
+  }
+
+  .edu {
+    display: grid;
+    gap: 0.2rem;
+    font-size: 0.88rem;
+  }
+
+  .achivements,
+  .socials {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 0.5rem;
+    font-size: 0.88rem;
+  }
+
+  .achivements li,
+  .socials li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    justify-content: space-between;
+  }
+
+  .muted {
+    color: var(--muted);
+    font-size: 0.82rem;
+  }
+
+  .jobs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: 1rem;
+    counter-reset: job;
+  }
+
+  .job {
+    position: relative;
+    padding: 1.2rem 1.3rem;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    background: var(--card);
+  }
+
+  .job::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 1.1rem;
+    bottom: 1.1rem;
+    width: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--accent), transparent);
+    opacity: 0.7;
+  }
+
+  .job-head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  .job h3 {
+    margin: 0;
+    font-size: 1.06rem;
+  }
+
+  .job-role {
+    margin: 0.15rem 0 0;
+    font-size: 0.86rem;
+    color: var(--accent);
+  }
+
+  .job-period {
+    font-size: 0.78rem;
+    color: var(--muted);
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+
+  .job-desc {
+    margin: 0.7rem 0 0.8rem;
+    font-size: 0.92rem;
+    color: var(--muted);
+  }
+
+  .stack {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .stack li {
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--accent-soft);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+  }
+
+  @media (max-width: 899px) {
+    .cv-body {
+      grid-template-columns: 1fr;
+    }
+    .cv-side {
+      position: static;
+    }
+    .skill-stars {
+      display: none;
+    }
+    .cv-head {
+      align-items: flex-start;
+    }
+  }
+</style>

@@ -1,24 +1,32 @@
-### To build project from zero:
+### Astro site — dev / build / deploy
 
-#1. build images
+# 1. build image
 build-images:
 	docker compose -f compose.dev.yaml build
 
-#2. build project
-build-project:
-	rm -rf ./node_modules && docker compose -f compose.dev.yaml run --rm gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && yarn install && yarn build"
+# 2. dev server → http://localhost:13201/
+dev:
+	docker compose -f compose.dev.yaml up
+
+dev-bg:
+	docker compose -f compose.dev.yaml up -d
+
+# production build → dist/
+build:
+	docker compose -f compose.dev.yaml run --rm web npm run build
+
+# host-local development (node >= 20)
+local-dev:
+	npm install && npm run dev
+
+preview:
+	docker compose -f compose.dev.yaml run --rm -p "13201:4321" web npm run preview
 
 down:
 	docker compose -f compose.dev.yaml down
 
-dev-build:
-	docker compose -f compose.dev.yaml run --rm gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && yarn install"
+# deploy dist/ to the gh-pages branch
+deploy: build
+	npx gh-pages -f -d dist
 
-dev:
-	docker compose -f compose.dev.yaml run -p "13200:8080"  --rm gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && yarn run develop"
-
-cmd:
-	docker compose -f compose.dev.yaml run builder bash
-
-deploy:
-	docker compose -f compose.dev.yaml run --rm -v ~/.ssh:/root/.ssh:ro gridsome bash -c "export NODE_OPTIONS=--openssl-legacy-provider && git config user.email 'effusps@gmail.com' && git config user.name 'evgeny.kon' && npm run deploy"
+.PHONY: build-images dev dev-bg build local-dev preview down deploy

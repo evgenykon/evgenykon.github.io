@@ -1,0 +1,12 @@
+---
+import { getEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import CvView from '../components/CvView.astro';
+
+const cv = await getEntry('cv', 'frontend');
+if (!cv) throw new Error('CV entry "frontend" not found');
+---
+
+<Base title={`${cv.data.position} — Evgeny Konoplev`} description={cv.data.annotation}>
+  <CvView cv={cv} />
+</Base>

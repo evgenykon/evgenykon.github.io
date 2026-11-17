@@ -1,0 +1,162 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import { formatDate, isoDate, readingTime } from '../../lib/format';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).sort(
+    (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+  );
+
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: {
+      post,
+      newer: posts[i - 1] ?? null,
+      older: posts[i + 1] ?? null,
+      index: i,
+      total: posts.length,
+    },
+  }));
+}
+
+const { post, newer, older, index, total } = Astro.props;
+const { Content } = await render(post);
+const title = post.data.title;
+---
+
+<Base title={`${title} — Evgeny Kon`} description={title}>
+  <article class="post wrap">
+    <header class="post-head">
+      <a class="back" href="/#feed">← all posts</a>
+      <div class="post-meta">
+        <time datetime={isoDate(post.data.date)}>{formatDate(post.data.date)}</time>
+        <span class="dot">·</span>
+        <span>{readingTime(post.body)} min read</span>
+        <span class="dot">·</span>
+        <span>#{String(index + 1).padStart(2, '0')} of {total}</span>
+      </div>
+      <h1>{title}</h1>
+    </header>
+
+    {post.data.img && <img class="post-hero" src={post.data.img} alt={title} />}
+
+    <div class="prose">
+      <Content />
+    </div>
+
+    <nav class="post-nav" aria-label="Post navigation">
+      {
+        older ? (
+          <a class="post-nav-item" href={`/blog/${older.id}/`}>
+            <span class="eyebrow">Older</span>
+            <strong>{older.data.title}</strong>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        newer ? (
+          <a class="post-nav-item right" href={`/blog/${newer.id}/`}>
+            <span class="eyebrow">Newer</span>
+            <strong>{newer.data.title}</strong>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+    </nav>
+  </article>
+</Base>
+
+<style>
+  .post {
+    padding: clamp(2rem, 6vw, 3.6rem) 0 0;
+    max-width: 780px;
+  }
+
+  .post-head {
+    margin-bottom: 1.6rem;
+  }
+
+  .back {
+    display: inline-block;
+    font-size: 0.84rem;
+    color: var(--muted);
+    margin-bottom: 1.1rem;
+  }
+
+  .back:hover {
+    color: var(--accent);
+    opacity: 1;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+    font-size: 0.76rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  .dot {
+    opacity: 0.5;
+  }
+
+  h1 {
+    font-size: clamp(1.85rem, 4.4vw, 2.9rem);
+    margin: 0.5rem 0 0;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, var(--text) 40%, var(--accent) 140%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .post-hero {
+    width: 100%;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  .post-nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 3rem 0 1rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .post-nav-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+  }
+
+  .post-nav-item strong {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  .post-nav-item.right {
+    text-align: right;
+    align-items: flex-end;
+  }
+
+  .post-nav-item:hover {
+    border-color: var(--accent);
+    opacity: 1;
+  }
+</style>

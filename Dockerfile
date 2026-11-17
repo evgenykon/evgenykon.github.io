@@ -1,12 +1,13 @@
-FROM node:17
+FROM node:22-alpine
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-ADD ./ /usr/src/app
+# dependencies first for layer caching
+COPY package.json ./
+RUN npm install --no-audit --no-fund
 
-EXPOSE 8080
+COPY . .
 
-RUN yarn install
+EXPOSE 4321
 
-#CMD ["yarn", "run", "start"]
-CMD ["yarn", "run", "develop"]
+CMD ["npm", "run", "dev"]

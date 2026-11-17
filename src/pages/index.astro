@@ -1,0 +1,373 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import SnowScene from '../components/SnowScene.astro';
+import { excerpt } from '../lib/format';
+import { SITE } from '../data/site';
+
+const all = await getCollection('blog');
+const posts = all
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .map((entry) => ({
+    id: entry.id,
+    title: entry.data.title,
+    date: entry.data.date,
+    img: entry.data.img ?? null,
+    body: entry.body,
+    excerpt: excerpt(entry.body, 148),
+  }));
+
+const cvs = (await getCollection('cv')).sort((a, b) => a.data.baseUrl!.localeCompare(b.data.baseUrl!));
+const cvMeta: Record<string, { label: string; href: string }> = {
+  fullstack: { label: 'Full-Stack', href: '/experience/' },
+  frontend: { label: 'Frontend', href: '/experience-front/' },
+  backend: { label: 'Backend', href: '/experience-back/' },
+};
+---
+
+<Base
+  title="Evgeny Konoplev — DevBlog, pet projects & CV"
+  description="Personal page of Evgeny Konoplev: engineering notes, pet projects and CV."
+>
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="hero-copy">
+        <p class="eyebrow">{SITE.location} · Senior Full-Stack / Tech Lead</p>
+        <h1>
+          Evgeny<br />Konoplev<span class="accent-dot">.</span>
+        </h1>
+        <p class="hero-lead">
+          I build web platforms, teach machines to be useful and write down what I learn on the way.
+          This is my notebook — hit the trail below.
+        </p>
+
+        <ul class="hero-points">
+          {SITE.topBanner.map((line) => <li>{line}</li>)}
+        </ul>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#feed">Read the blog</a>
+          <a class="btn" href="/experience/">View CV</a>
+          <a class="btn" href="https://github.com/evgenykon" target="_blank" rel="noopener">GitHub</a>
+        </div>
+
+        <dl class="stats">
+          <div>
+            <dt>Experience</dt>
+            <dd>15+ yrs</dd>
+          </div>
+          <div>
+            <dt>Notes</dt>
+            <dd>{posts.length}</dd>
+          </div>
+          <div>
+            <dt>CVs</dt>
+            <dd>{cvs.length}</dd>
+          </div>
+          <div>
+            <dt>Teams led</dt>
+            <dd>10 eng</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="orb"></div>
+        <svg class="mountains" viewBox="0 0 400 200" preserveAspectRatio="none">
+          <path d="M0 160 L60 96 L108 138 L168 62 L232 148 L286 106 L340 152 L400 112 L400 200 L0 200 Z" fill="currentColor" opacity="0.16"></path>
+          <path d="M0 180 L72 128 L132 168 L200 104 L262 172 L330 132 L400 176 L400 200 L0 200 Z" fill="currentColor" opacity="0.26"></path>
+        </svg>
+        <div class="snow" aria-hidden="true">
+          {Array.from({ length: 18 }).map((_, i) => <i style={`--x:${(i * 37) % 100}%;--d:${6 + (i % 7)}s;--dl:${i * 0.4}s;--s:${2 + (i % 3)}px`} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <SnowScene posts={posts} />
+
+  <section class="wrap outro">
+    <div class="outro-head">
+      <span class="eyebrow">CV · 3 angles</span>
+      <h2>Same person, three focus points</h2>
+      <p>Full-stack lead, frontend architect and backend engineer — pick the one that matches the role.</p>
+    </div>
+
+    <div class="cv-grid">
+      {
+        cvs.map((cv) => (
+          <a class="cv-card" href={cvMeta[cv.id]?.href ?? '/'}>
+            <span class="chip">{cvMeta[cv.id]?.label ?? cv.id}</span>
+            <h3>{cv.data.position}</h3>
+            <p>{excerpt(cv.data.annotation, 150)}</p>
+            <span class="cv-open">Open CV →</span>
+          </a>
+        ))
+      }
+    </div>
+
+    <div class="elsewhere">
+      <span class="eyebrow">Elsewhere</span>
+      <div class="elsewhere-links">
+        <a class="btn" href="https://github.com/evgenykon" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://www.linkedin.com/in/evgeny-kon/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://www.hackerrank.com/effusps" target="_blank" rel="noopener">HackerRank</a>
+        <a class="btn" href="mailto:effusps@gmail.com">effusps@gmail.com</a>
+      </div>
+      <p class="bottom-note">{SITE.bottom}</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    padding: clamp(3rem, 8vw, 6.5rem) 0 clamp(2rem, 5vw, 3.5rem);
+    z-index: 1;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: center;
+  }
+
+  h1 {
+    font-size: clamp(2.7rem, 6.2vw, 5rem);
+    line-height: 0.94;
+    letter-spacing: -0.045em;
+    margin: 0.35rem 0 1.1rem;
+    background: linear-gradient(135deg, var(--text) 30%, var(--accent) 130%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .accent-dot {
+    color: var(--accent);
+    -webkit-text-fill-color: var(--accent);
+  }
+
+  .hero-lead {
+    font-size: clamp(1rem, 1.4vw, 1.14rem);
+    color: var(--text-dim);
+    max-width: 46ch;
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-points {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.8rem;
+    display: grid;
+    gap: 0.45rem;
+    max-width: 52ch;
+  }
+
+  .hero-points li {
+    position: relative;
+    padding-left: 1.35rem;
+    color: var(--muted);
+    font-size: 0.94rem;
+  }
+
+  .hero-points li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    transform: rotate(45deg);
+  }
+
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.6rem;
+    margin: 0;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stats dt {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stats dd {
+    margin: 0.15rem 0 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  /* hero art */
+  .hero-art {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    max-height: 460px;
+    border-radius: 32px;
+    border: 1px solid var(--border);
+    background: radial-gradient(circle at 50% 40%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 62%),
+      linear-gradient(180deg, var(--bg-soft), var(--bg-deep));
+    overflow: hidden;
+    color: var(--accent);
+  }
+
+  .orb {
+    position: absolute;
+    left: 50%;
+    top: 44%;
+    width: 58%;
+    aspect-ratio: 1;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: conic-gradient(from 210deg, var(--accent), var(--accent-2), var(--accent));
+    filter: blur(46px);
+    opacity: 0.35;
+    animation: orb-spin 22s linear infinite;
+  }
+
+  @keyframes orb-spin {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+
+  .mountains {
+    position: absolute;
+    inset: auto 0 0;
+    width: 100%;
+    height: 46%;
+  }
+
+  .snow i {
+    position: absolute;
+    left: var(--x);
+    top: -8%;
+    width: var(--s);
+    height: var(--s);
+    border-radius: 50%;
+    background: var(--snow);
+    opacity: 0.55;
+    animation: snow-fall var(--d) linear var(--dl) infinite;
+  }
+
+  @keyframes snow-fall {
+    to {
+      transform: translateY(560px) translateX(24px);
+      opacity: 0;
+    }
+  }
+
+  /* outro */
+  .outro {
+    margin-top: clamp(3rem, 7vw, 5rem);
+  }
+
+  .outro-head {
+    max-width: 60ch;
+    margin-bottom: 1.6rem;
+  }
+
+  .outro-head h2 {
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    margin: 0.25rem 0 0.5rem;
+  }
+
+  .outro-head p {
+    color: var(--muted);
+  }
+
+  .cv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .cv-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.4rem 1.35rem;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .cv-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: var(--shadow);
+    opacity: 1;
+  }
+
+  .cv-card h3 {
+    margin: 0;
+    font-size: 1.08rem;
+  }
+
+  .cv-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .cv-open {
+    margin-top: auto;
+    padding-top: 0.6rem;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .elsewhere {
+    margin-top: 2.6rem;
+    padding: 1.6rem 1.4rem;
+    border-radius: 18px;
+    border: 1px dashed var(--border-strong);
+  }
+
+  .elsewhere-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 0.7rem 0 1rem;
+  }
+
+  .bottom-note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.92rem;
+    max-width: 68ch;
+  }
+
+  @media (max-width: 899px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+    }
+    .hero-art {
+      order: -1;
+      max-height: 260px;
+      aspect-ratio: 16 / 10;
+    }
+    .mountains {
+      height: 60%;
+    }
+  }
+</style>
