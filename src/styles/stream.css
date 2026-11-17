@@ -1,36 +1,25 @@
 /* ============================================================
-   Blog stream: full articles in flow + sticky isometric rail
+   Blog stream over the liquid background
    ============================================================ */
 .stream {
-  padding: 1.4rem 0 0;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  padding: 1.2rem 0 0;
 }
 
-.stream-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) clamp(280px, 31vw, 440px);
-  gap: clamp(1.4rem, 3.5vw, 3.2rem);
-  width: min(1240px, 100% - 2.5rem);
+.stream-inner {
+  width: min(780px, 100% - 2.5rem);
   margin-inline: auto;
-  align-items: stretch;
-}
-
-.stream-main {
-  min-width: 0;
-  padding-bottom: 2rem;
 }
 
 /* ---------- one full article ---------- */
 .post-full {
   scroll-margin-top: 88px;
-  max-width: 70ch;
 }
 
 .post-head {
-  position: relative;
   padding-bottom: 1rem;
-  margin-bottom: 1.2rem;
+  margin-bottom: 1.4rem;
   border-bottom: 1px solid var(--border);
 }
 
@@ -100,10 +89,10 @@
   color: var(--accent);
 }
 
-/* ---------- gap between articles (the trick window) ---------- */
+/* ---------- separator between articles ---------- */
 .post-gap {
   position: relative;
-  height: clamp(4.5rem, 10vh, 7.5rem);
+  height: clamp(3.5rem, 8vh, 6rem);
 }
 
 .post-gap::before {
@@ -128,339 +117,8 @@
   transform: rotate(45deg);
 }
 
-/* ============================================================
-   Rider rail
-   ============================================================ */
-.rail {
-  position: relative;
-  height: 100%;
-}
-
-.rail-sticky {
-  position: sticky;
-  top: calc(var(--header-h, 64px) + 0.6rem);
-  height: calc(100vh - var(--header-h, 64px) - 1.4rem);
-  border-radius: 24px;
-  border: 1px solid var(--border);
-  overflow: hidden;
-  background: linear-gradient(180deg, var(--bg-soft), var(--bg-deep));
-}
-
-/* isometric snow slope */
-.slope {
-  position: absolute;
-  inset: 0;
-  background:
-    repeating-linear-gradient(102deg, var(--grid-line) 0 1px, transparent 1px 56px),
-    radial-gradient(120% 55% at 50% 0%, rgba(94, 231, 255, 0.08), transparent 62%),
-    linear-gradient(200deg, color-mix(in srgb, var(--bg-soft) 70%, #ffffff 0%), var(--bg-deep) 70%);
-  opacity: 0.95;
-}
-
-.slope::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(70% 45% at 50% 58%, transparent, color-mix(in srgb, var(--bg) 55%, transparent) 100%);
-}
-
-.rail-gates {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  opacity: 0.5;
-}
-
-.rail-gate {
-  position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 0;
-  height: 14px;
-  will-change: transform;
-}
-
-.rail-gate::before,
-.rail-gate::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  width: 7px;
-  height: 7px;
-  margin-top: -3.5px;
-  border: 1px solid var(--accent);
-  background: color-mix(in srgb, var(--accent) 18%, transparent);
-  border-radius: 2px;
-  transform: rotate(45deg);
-}
-
-.rail-gate::before {
-  left: 0;
-}
-
-.rail-gate::after {
-  right: 0;
-}
-
-.rail-snow {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.rail-snow i {
-  position: absolute;
-  left: var(--x);
-  bottom: -10px;
-  width: var(--s);
-  height: var(--s);
-  border-radius: 50%;
-  background: var(--snow);
-  opacity: 0.3;
-  animation: rail-snow-fall var(--d) linear var(--dl) infinite;
-}
-
-@keyframes rail-snow-fall {
-  0% {
-    transform: translate3d(0, 0, 0);
-    opacity: 0;
-  }
-  12% {
-    opacity: 0.35;
-  }
-  88% {
-    opacity: 0.3;
-  }
-  100% {
-    transform: translate3d(26px, -110%, 0);
-    opacity: 0;
-  }
-}
-
-/* ---------- trick fx ---------- */
-.fx {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-
-.fx-arc {
-  fill: none;
-  stroke: var(--accent);
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-dasharray: 8 10;
-  opacity: 0;
-}
-
-.ramp {
-  position: absolute;
-  width: 42px;
-  height: 14px;
-  transform: translate(-50%, -85%) rotate(-14deg);
-  border-radius: 60% 40% 20% 20%;
-  background: linear-gradient(180deg, var(--snow), color-mix(in srgb, var(--accent) 14%, var(--bg-soft)));
-  opacity: 0;
-  transition: opacity 0.18s ease;
-}
-
-.burst {
-  position: absolute;
-  left: 50%;
-  top: 54%;
-  width: 150px;
-  height: 46px;
-  margin: -23px 0 0 -75px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, color-mix(in srgb, var(--snow) 55%, transparent), transparent 70%);
-  filter: blur(4px);
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* ---------- the rider ---------- */
-.rider {
-  position: absolute;
-  left: 50%;
-  top: 52%;
-  width: clamp(210px, 21vw, 300px);
-  height: clamp(210px, 21vw, 300px);
-  transform: translate(-50%, -50%);
-  z-index: 3;
-  will-change: transform;
-}
-
-.rider-svg {
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.45));
-}
-
-.rider-svg [data-spin],
-.rider-svg [data-board],
-.rider-svg [data-torso],
-.rider-svg [data-thigh-back],
-.rider-svg [data-shin-back],
-.rider-svg [data-thigh-front],
-.rider-svg [data-shin-front],
-.rider-svg [data-arm-back],
-.rider-svg [data-arm-front] {
-  transform-box: view-box;
-  will-change: transform;
-}
-
-.rider-svg [data-spin] {
-  transform-origin: 112px 122px;
-}
-
-.rider-svg [data-board] {
-  transform-origin: 110px 155px;
-}
-
-.rider-svg [data-thigh-back] {
-  transform-origin: 104px 124px;
-}
-
-.rider-svg [data-shin-back] {
-  transform-origin: 92px 142px;
-}
-
-.rider-svg [data-thigh-front] {
-  transform-origin: 112px 126px;
-}
-
-.rider-svg [data-shin-front] {
-  transform-origin: 132px 146px;
-}
-
-.rider-svg [data-torso] {
-  transform-origin: 116px 130px;
-}
-
-.rider-svg [data-arm-back] {
-  transform-origin: 106px 94px;
-}
-
-.rider-svg [data-arm-front] {
-  transform-origin: 128px 92px;
-}
-
-.rider-shadow {
-  position: absolute;
-  left: 50%;
-  top: 60%;
-  width: 128px;
-  height: 34px;
-  margin: -17px 0 0 -64px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55), transparent 72%);
-  filter: blur(3px);
-  z-index: 2;
-  will-change: transform, opacity;
-}
-
-.spray {
-  position: absolute;
-  left: 50%;
-  top: 62%;
-  width: 0;
-  height: 0;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.spray span {
-  position: absolute;
-  left: -3.5px;
-  top: -3.5px;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--snow);
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
-.trick-label {
-  position: absolute;
-  left: 50%;
-  top: 16%;
-  transform: translate(-50%, 0);
-  z-index: 4;
-  padding: 0.26rem 0.72rem;
-  border-radius: 999px;
-  border: 1px solid var(--border-strong);
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
-  color: var(--accent);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  opacity: 0;
-  box-shadow: var(--glow);
-  will-change: opacity;
-}
-
-.rail-hud {
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-  bottom: 1rem;
-  z-index: 4;
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  pointer-events: none;
-  font-variant-numeric: tabular-nums;
-  font-size: 0.78rem;
-  color: var(--muted);
-  letter-spacing: 0.12em;
-}
-
-.rail-hud b {
-  font-size: 1.15rem;
-  color: var(--text);
-  letter-spacing: 0;
-}
-
-.rail-hud i {
-  font-style: normal;
-  opacity: 0.7;
-}
-
-.hud-bar {
-  flex: 1;
-  height: 2px;
-  border-radius: 2px;
-  background: var(--border-strong);
-  overflow: hidden;
-}
-
-.hud-bar span {
-  display: block;
-  height: 100%;
-  width: 0%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-}
-
-@media (max-width: 899px) {
-  .stream-grid {
-    grid-template-columns: 1fr;
-    width: min(720px, 100% - 2rem);
-  }
-
-  .rail {
-    display: none;
-  }
-
-  .post-full {
-    max-width: none;
+@media (max-width: 640px) {
+  .stream-inner {
+    width: min(780px, 100% - 1.75rem);
   }
 }

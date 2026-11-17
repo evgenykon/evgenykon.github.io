@@ -24,9 +24,8 @@ const cvMeta: Record<string, { label: string; href: string }> = {
   <span id="top"></span>
 
   <section class="band">
-    <div class="wrap band-inner">
+    <div class="band-inner">
       <div class="band-copy">
-        <p class="eyebrow">{SITE.location} · Senior Full-Stack / Tech Lead</p>
         <h1>{SITE.title}</h1>
         <ul class="band-points">
           {SITE.topBanner.map((line) => <li>{line}</li>)}
@@ -96,15 +95,24 @@ const cvMeta: Record<string, { label: string; href: string }> = {
 <style>
   .band {
     position: relative;
-    z-index: 1;
-    padding: clamp(1.8rem, 4.5vw, 3.2rem) 0 clamp(1rem, 2.5vw, 1.8rem);
+    z-index: 2;
+    padding: clamp(2rem, 5vw, 3.6rem) 0 clamp(1rem, 2.5vw, 1.8rem);
   }
 
   .band-inner {
+    width: min(780px, 100% - 2.5rem);
+    margin-inline: auto;
     display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
-    gap: clamp(1.2rem, 3vw, 2.6rem);
-    align-items: end;
+    gap: clamp(1.2rem, 3vw, 2rem);
+  }
+
+  .band-aside {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.2rem 1.8rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border);
   }
 
   h1 {
@@ -140,12 +148,6 @@ const cvMeta: Record<string, { label: string; href: string }> = {
     border-radius: 2px;
     background: linear-gradient(135deg, var(--accent), var(--accent-2));
     transform: rotate(45deg);
-  }
-
-  .band-aside {
-    display: grid;
-    gap: 1.1rem;
-    justify-items: start;
   }
 
   .band-stats {

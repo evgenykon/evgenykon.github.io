@@ -35,7 +35,7 @@ const isCurrent = (href: string) =>
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="theme-color" content="#060911" />
+    <meta name="theme-color" content="#141414" />
     <script is:inline>
       (() => {
         try {
@@ -45,12 +45,13 @@ const isCurrent = (href: string) =>
           document.documentElement.dataset.theme = theme;
           document
             .querySelector('meta[name="theme-color"]')
-            ?.setAttribute('content', theme === 'light' ? '#f4f7fc' : '#060911');
+            ?.setAttribute('content', theme === 'light' ? '#f3f1ec' : '#141414');
         } catch (e) {}
       })();
     </script>
   </head>
   <body>
+    <canvas class="fluid" data-fluid aria-hidden="true"></canvas>
     <header class="site-header">
       <div class="wrap">
         <a class="brand" href="/">
@@ -103,13 +104,17 @@ const isCurrent = (href: string) =>
     </footer>
 
     <script>
+      import { initFluidBackground } from '../scripts/fluid-bg';
+
+      initFluidBackground();
+
       const btn = document.querySelector('[data-theme-toggle]');
       const root = document.documentElement;
       const meta = document.querySelector('meta[name="theme-color"]');
 
       const sync = (theme: string) => {
         root.dataset.theme = theme;
-        meta?.setAttribute('content', theme === 'light' ? '#f4f7fc' : '#060911');
+        meta?.setAttribute('content', theme === 'light' ? '#f3f1ec' : '#141414');
       };
 
       btn?.addEventListener('click', () => {
