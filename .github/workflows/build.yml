@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: build-${{ github.ref }}
@@ -27,7 +27,21 @@ jobs:
         run: npm install --no-audit --no-fund
 
       - name: Build
-        run: npm run build
+        run: |
+          set -o pipefail
+          npm run build 2>&1 | tee build.log
+
+      - name: Publish build log on failure
+        if: failure()
+        run: |
+          git config user.name "ci-bot"
+          git config user.email "ci-bot@users.noreply.github.com"
+          git checkout -q --orphan ci-log
+          git rm -rq --cached . || true
+          { echo "commit: ${{ github.sha }}"; echo "--- conditions ---"; node -v; npm -v; echo "--- build.log ---"; cat build.log 2>/dev/null || echo "no build.log"; } > ci-build.log
+          git add -f ci-build.log
+          git commit -qm "ci-build.log for ${{ github.sha }}"
+          git push -f origin ci-log
 
       - name: Verify output
         run: |
